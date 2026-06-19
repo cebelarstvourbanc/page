@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Čebelarstvo Urbanc</title>
+  <!-- hCaptcha -->
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber-light: #FAEEDA;
+      --amber-mid:   #FAC775;
+      --amber:       #EF9F27;
+      --amber-dark:  #633806;
+      --amber-deep:  #412402;
+      --green-light: #EAF3DE;
+      --green:       #3B6D11;
+      --green-dark:  #27500A;
+      --red-light:   #FCEBEB;
+      --red:         #A32D2D;
+      --text:        #2C2C2A;
+      --text-muted:  #5F5E5A;
+      --bg:          #FFFDF8;
+      --surface:     #FFFFFF;
+      --border:      rgba(0,0,0,0.1);
+      --radius:      12px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--amber-deep);
+      color: var(--amber-light);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; font-size: 18px; font-weight: 500; }
+    .nav-brand span { font-size: 24px; }
+
+    /* LANGUAGE SWITCHER — flag emoji buttons */
+    .lang-switcher { display: flex; gap: 6px; }
+    .lang-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      opacity: 0.65;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.22); opacity: 0.9; }
+    .lang-btn.active { background: rgba(255,255,255,0.25); opacity: 1; outline: 2px solid var(--amber-mid); outline-offset: 1px; }
+
+    /* HERO — no title, just tagline */
+    .hero {
+      background: var(--amber-mid);
+      color: var(--amber-deep);
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "🍯";
+      position: absolute;
+      font-size: 160px;
+      opacity: 0.07;
+      top: -20px; right: -20px;
+      pointer-events: none;
+    }
+    .hero .bee { font-size: 56px; display: block; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(24px, 5vw, 38px); font-weight: 600; margin-bottom: 0.5rem; }
+    .hero p  { font-size: 17px; color: var(--amber-dark); max-width: 500px; margin: 0 auto; }
+
+    .wrap { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--amber-deep);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--amber-mid);
+    }
+
+    /* ABOUT */
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--amber);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .about-box p + p { margin-top: 0.75rem; }
+
+    /* HONEY CARDS */
+    .honey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+      margin-bottom: 3rem;
+    }
+    .honey-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      position: relative;
+      border: 2px solid transparent;
+    }
+    .honey-card.available {
+      border-color: var(--green);
+	  background-color: rgba(0, 255, 0, 0.1);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .honey-card.available:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .honey-card.available .badge {
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+    .honey-card.unavailable { 
+	  border-color: var(--red);
+	  background-color: var(--red-light); 
+	}
+
+	.honey-card.unavailable .badge {
+	  background: var(--red-light);
+	  color: var(--red);
+	  border: 1px solid var(--red);
+	}
+    .honey-card .icon { font-size: 36px; display: block; margin-bottom: 0.75rem; }
+    .honey-card h3 { font-size: 16px; font-weight: 600; color: var(--amber-deep); margin-bottom: 6px; }
+    .honey-card p.desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    /* PHOTOS */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 3rem;
+    }
+    .photo-grid a {
+      display: block;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .photo-grid a:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .photo-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* MAP TABS */
+    .map-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
+    .map-tab {
+      padding: 8px 18px;
+      border-radius: 8px 8px 0 0;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      background: var(--amber-light);
+      color: var(--amber-dark);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .map-tab.active { background: var(--surface); color: var(--amber-deep); }
+    .map-wrapper {
+      border-radius: 0 var(--radius) var(--radius) var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .map-panel { display: none; }
+    .map-panel.active { display: block; }
+    .map-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 340px;
+      border: none;
+    }
+    .map-footer {
+      background: var(--amber-light);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .map-footer p { font-size: 14px; color: var(--amber-dark); }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber-deep);
+      color: var(--amber-light);
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    .nav-btn:hover { background: var(--amber-dark); }
+
+    /* DIRECTIONS */
+    .directions-panel { padding: 1.5rem 1.5rem 0.5rem; background: var(--surface); }
+    .directions-panel h3 { font-size: 15px; font-weight: 600; color: var(--amber-deep); margin-bottom: 1rem; }
+    .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 1rem; }
+    .step-num {
+      min-width: 28px; height: 28px; border-radius: 50%;
+      background: var(--amber-mid); color: var(--amber-deep);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step p { font-size: 14px; color: var(--text); }
+    .step p em { color: var(--text-muted); font-style: normal; font-size: 13px; display: block; margin-top: 2px; }
+    .landmark-box {
+      background: var(--amber-light);
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .landmark-box span { font-size: 24px; flex-shrink: 0; }
+    .landmark-box p { font-size: 13px; color: var(--amber-dark); }
+
+    /* ADDRESS */
+    .contact-bar {
+      background: var(--green-light);
+      border: 1px solid rgba(59,109,17,0.25);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .contact-bar .contact-icon { font-size: 28px; }
+    .contact-bar p { font-size: 15px; color: var(--green-dark); }
+
+    /* CONTACT FORM */
+    .contact-form-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--amber); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .captcha-row { margin: 16px 0; }
+    .submit-btn {
+      background: var(--amber-deep);
+      color: var(--amber-light);
+      border: none;
+      border-radius: 8px;
+      padding: 11px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: var(--amber-dark); }
+    .form-success {
+      display: none;
+      background: var(--green-light);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      color: var(--green-dark);
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    footer {
+      background: var(--amber-deep);
+      color: var(--amber-light);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 13px;
+    }
+	
+	.badge {
+	  display: inline-block;
+	  margin-top: 10px;
+	  margin-bottom: 10px;
+	}
+	
+	.hero {
+	  background: url('cepovan.jpg');
+	  background-size: cover;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  min-height: 560px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  text-align: center;
+	  color: white;
+	  padding: 2rem 1.5rem;
+	}
+	
+	.hero-content {
+	  max-width: 600px;
+	  backdrop-filter: blur(2px);
+	}
+
+    @media (max-width: 540px) {
+      .map-tab { font-size: 12px; padding: 6px 10px; }
+      .map-footer { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    [data-lang] { display: none; }
+    [data-lang].lang-active { display: block; }
+    span[data-lang].lang-active { display: inline; }
+	
+	.step p {
+	  flex: 1;
+	  margin: 0;
+	  display: block;
+	}
+
+	.step p strong {
+	  display: inline;
+	}
+
+	.step p em {
+	  display: block;
+	  margin-top: 4px;
+	  color: var(--text-muted);
+	}
+
+.step {
+  align-items: flex-start;
+}
+
+.intro {
+  max-width: 860px;
+  margin: 2.5rem auto 1rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+}
+
+.intro h2 {
+  font-size: 20px;
+  margin-bottom: 0.75rem;
+  color: var(--amber-deep);
+}
+
+.intro p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.intro p + p {
+  margin-top: 0.6rem;
+}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><span>🐝</span> Čebelarstvo Urbanc</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('sl')" title="Slovenščina">🇸🇮</button>
+    <button class="lang-btn" onclick="setLang('en')" title="English">🇬🇧</button>
+    <button class="lang-btn" onclick="setLang('de')" title="Deutsch">🇩🇪</button>
+    <button class="lang-btn" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+  </div>
+</nav>
+
+<!-- HERO: samo tagline, brez naslova -->
+<header class="hero">
+  <!-- <span class="bee">🐝</span> -->
+  <!-- <p data-lang="sl" class="lang-active">Svež, naraven med — naravnost iz panja do vaše mize</p> -->
+  <!-- <p data-lang="en">Fresh, natural honey — straight from the hive to your table</p> -->
+  <!-- <p data-lang="de">Frischer, natürlicher Honig — direkt vom Bienenstock auf Ihren Tisch</p> -->
+  <!-- <p data-lang="it">Miele fresco e naturale — direttamente dall'alveare alla vostra tavola</p> -->
+</header>
+
+<main class="wrap">
+
+  <!-- O NAS -->
+<!-- Slovenščina -->
+<section class="intro" data-lang="sl">
+  <h2>🐝 Čebelarstvo Urbanc</h2>
+
+  <p>
+    Smo družinsko čebelarstvo iz Čepovana, kjer čebele nabirajo nektar v
+    neokrnjeni naravi Čepovanske doline.
+  </p>
+
+  <p>
+    Naš med je ročno pridelan v majhnih serijah, brez dodatkov — samo narava,
+    čebele in potrpežljivo delo.
+  </p>
+</section>
+
+
+<!-- German -->
+<section class="intro" data-lang="de">
+  <h2>🐝 Imkerei Urbanc</h2>
+
+  <p>
+    Wir sind eine Familienimkerei aus Čepovan, wo Bienen Nektar in der
+    unberührten Natur des Čepovanska-Tals sammeln.
+  </p>
+
+  <p>
+    Unser Honig wird in kleinen Chargen von Hand hergestellt, ohne Zusätze —
+    nur Natur, Bienen und geduldige Arbeit.
+  </p>
+</section>
+
+
+<!-- English -->
+<section class="intro" data-lang="en">
+  <h2>🐝 Urbanc Beekeeping</h2>
+
+  <p>
+    We are a family beekeeping farm from Čepovan, where bees collect nectar in
+    the untouched nature of the Čepovan Valley.
+  </p>
+
+  <p>
+    Our honey is handcrafted in small batches, with no additives — only nature,
+    bees, and patient work.
+  </p>
+</section>
+
+
+<!-- Italian -->
+<section class="intro" data-lang="it">
+  <h2>🐝 Apicoltura Urbanc</h2>
+
+  <p>
+    Siamo un’azienda familiare di apicoltura di Čepovan, dove le api raccolgono
+    nettare nella natura incontaminata della Valle di Čepovan.
+  </p>
+
+  <p>
+    Il nostro miele è prodotto a mano in piccoli lotti, senza additivi —
+    solo natura, api e lavoro paziente.
+  </p>
+</section>
+  
+   <!-- MEDU -->
+  <h2 class="section-title">
+    <span data-lang="sl" class="lang-active">🍯 Naši medovi</span>
+    <span data-lang="en">🍯 Our honeys</span>
+    <span data-lang="de">🍯 Unsere Honigsorten</span>
+    <span data-lang="it">🍯 I nostri mieli</span>
+  </h2>
+  <div class="honey-grid">
+    <div class="honey-card available">
+      <span class="icon">🌿</span>
+      <h3><span data-lang="sl" class="lang-active">Lipov med</span><span data-lang="en">Linden honey</span><span data-lang="de">Lindenhonig</span><span data-lang="it">Miele di tiglio</span></h3>
+	  <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>  
+	  <p class="desc"><span data-lang="sl" class="lang-active">Nežen in aromatičen z blagim cvetličnim okusom.</span><span data-lang="en">Delicate and aromatic with a mild floral taste.</span><span data-lang="de">Zart und aromatisch mit mildem Blütengeschmack.</span><span data-lang="it">Delicato e aromatico con un gusto floreale delicato.</span></p>
+    </div>
+    <div class="honey-card available">
+      <span class="icon">🌸</span>
+	  <h3><span data-lang="sl" class="lang-active">Cvetlični med</span><span data-lang="en">Wildflower honey</span><span data-lang="de">Blütenhonig</span><span data-lang="it">Miele di fiori</span></h3>
+      <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>   
+	  <p class="desc"><span data-lang="sl" class="lang-active">Uravnotežen okus poletnih travniških cvetlic.</span><span data-lang="en">Balanced taste of summer meadow flowers.</span><span data-lang="de">Ausgewogener Geschmack von Sommerwiesen.</span><span data-lang="it">Sapore equilibrato di fiori di prato estivo.</span></p>
+     </div>
+    <div class="honey-card available">
+      <span class="icon">🌼</span>
+      <h3><span data-lang="sl" class="lang-active">Akacijev med</span><span data-lang="en">Acacia honey</span><span data-lang="de">Akazienhonig</span><span data-lang="it">Miele di acacia</span></h3>
+	  <span class="badge"><span data-lang="sl" class="lang-active">✗ Ni na voljo.</span><span data-lang="en">✗ Unavailable.</span><span data-lang="de">✗ Nicht verfügbar.</span><span data-lang="it">✗ Non disponibile.</span></span>    
+	<p class="desc"><span data-lang="sl" class="lang-active">Svetel, tekoč in posebno sladek.</span><span data-lang="en">Light, liquid and exceptionally sweet.</span><span data-lang="de">Hell, flüssig und besonders süß.</span><span data-lang="it">Chiaro, liquido e particolarmente dolce.</span></p>
+    </div>
+    <div class="honey-card available">
+      <span class="icon">🌲</span>
+	  <h3><span data-lang="sl" class="lang-active">Gozdni med</span><span data-lang="en">Forest honey</span><span data-lang="de">Waldhonig</span><span data-lang="it">Miele di bosco</span></h3>
+      <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>
+      <p class="desc"><span data-lang="sl" class="lang-active">Bogat in temnejši med z intenzivnim okusom.</span><span data-lang="en">Rich, darker honey with an intense earthy flavour.</span><span data-lang="de">Reicher, dunklerer Honig mit intensivem Aroma.</span><span data-lang="it">Miele ricco e scuro con sapore intenso e terroso.</span></p>
+    </div>
+  </div>
+
+  <!-- UTRINKI -->
+  <h2 class="section-title">
+    <span data-lang="sl" class="lang-active">📸 Utrinki iz čebelnjaka</span>
+    <span data-lang="en">📸 From our apiary</span>
+    <span data-lang="de">📸 Aus unserem Bienenhaus</span>
+    <span data-lang="it">📸 Dal nostro apiario</span>
+  </h2>
+  <div class="photo-grid">
+    <a href="cebele.jpeg" target="_blank" rel="noopener" title="Čebele / Bees">
+      <img src="cebele.jpeg" alt="Čebele" />
+    </a>
+    <a href="roj.jpg" target="_blank" rel="noopener" title="Roj / Swarm">
+      <img src="roj.jpg" alt="Roj čebel" />
+    </a>
+    <a href="cebelnjak.jpg" target="_blank" rel="noopener" title="Čebelnjak / Apiary">
+      <img src="cebelnjak.jpg" alt="Naš čebelnjak" />
+    </a>
+  </div>
+
+  <!-- LOKACIJA -->
+  <h2 class="section-title">
+    <span data-lang="sl" class="lang-active">📍 Kje nas najdete</span>
+    <span data-lang="en">📍 Find us</span>
+    <span data-lang="de">📍 So finden Sie uns</span>
+    <span data-lang="it">📍 Come trovarci</span>
+  </h2>
+  <div class="map-tabs">
+    <button class="map-tab active" onclick="showTab('gmaps', this)">🗺️ <span data-lang="sl" class="lang-active">Zemljevid</span><span data-lang="en">Map</span><span data-lang="de">Karte</span><span data-lang="it">Mappa</span></button>
+    <button class="map-tab" onclick="showTab('street', this)">📷 <span data-lang="sl" class="lang-active">Pogled z ulice</span><span data-lang="en">Street View</span><span data-lang="de">Straßenansicht</span><span data-lang="it">Vista strada</span></button>
+    <button class="map-tab" onclick="showTab('directions', this)">🧭 <span data-lang="sl" class="lang-active">Navodila</span><span data-lang="en">Directions</span><span data-lang="de">Wegbeschreibung</span><span data-lang="it">Indicazioni</span></button>
+  </div>
+  <div class="map-wrapper">
+    <div class="map-panel active" id="tab-gmaps">
+      <iframe src="https://www.google.com/maps?q=Čepovan+76,+5253+Čepovan,+Slovenija&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Lokacija čebelnjaka Urbanc"></iframe>
+      <div class="map-footer">
+        <p>📌 Čepovan 76, 5253 Čepovan, Slovenija</p>
+        <a class="nav-btn" href="https://www.google.com/maps/dir/?api=1&destination=Čepovan+76,+5253+Čepovan,+Slovenija" target="_blank" rel="noopener">🧭 <span data-lang="sl" class="lang-active">Odpri navigacijo</span><span data-lang="en">Open navigation</span><span data-lang="de">Navigation öffnen</span><span data-lang="it">Apri navigazione</span></a>
+      </div>
+    </div>
+    <div class="map-panel" id="tab-street">
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1781856121836!6m8!1m7!1sTMZXfoCsIWZPT0rwe_FnNw!2m2!1d46.04890023051404!2d13.79271855705016!3f322.8436422878618!4f3.9208983372302555!5f0.7820865974627469"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Street View čebelnjaka Urbanc" style="display:block;width:100%;height:340px;border:none;"></iframe>
+      <div class="map-footer">
+        <p>📷 <span data-lang="sl" class="lang-active">Pogled z ulice — tako izgleda naša hiša</span><span data-lang="en">Street View — this is what our house looks like</span><span data-lang="de">Straßenansicht — so sieht unser Haus aus</span><span data-lang="it">Vista strada — ecco come appare la nostra casa</span></p>
+      </div>
+    </div>
+    <div class="map-panel" id="tab-directions">
+      <div class="directions-panel">
+        <h3>🚗 <span data-lang="sl" class="lang-active">Kako do nas — iz smeri Nove Gorice</span><span data-lang="en">How to reach us — from Nova Gorica</span><span data-lang="de">Anfahrt — aus Richtung Nova Gorica</span><span data-lang="it">Come raggiungerci — da Nova Gorica</span></h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <p><span data-lang="sl" class="lang-active">Iz Nove Gorice vozite v smeri <strong>Ajdovščina / Col</strong>.<em>Sledite oznakam za Čepovan.</em></span><span data-lang="en">From Nova Gorica, drive towards <strong>Ajdovščina / Col</strong>.<em>Follow signs for Čepovan.</em></span><span data-lang="de">Von Nova Gorica Richtung <strong>Ajdovščina / Col</strong> fahren.<em>Schildern nach Čepovan folgen.</em></span><span data-lang="it">Da Nova Gorica, guidare verso <strong>Ajdovščina / Col</strong>.<em>Seguire le indicazioni per Čepovan.</em></span></p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p><span data-lang="sl" class="lang-active">Ko pridete v vas, poiščite <strong>hišno številko 76</strong>.<em>Hiša je na levi strani ceste.</em></span><span data-lang="en">Once in the village, look for <strong>house number 76</strong>.<em>The house is on the left side of the road.</em></span><span data-lang="de">Im Dorf die <strong>Hausnummer 76</strong> suchen.<em>Das Haus befindet sich auf der linken Seite.</em></span><span data-lang="it">Nel villaggio, cercare il <strong>numero civico 76</strong>.<em>La casa si trova sul lato sinistro della strada.</em></span></p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p><span data-lang="sl" class="lang-active">Prepoznate nas po <strong>rumeni čebelarski tabli</strong> pred hišo.<em>Parkiranje je možno ob cesti.</em></span><span data-lang="en">Look for the <strong>yellow beekeeping sign</strong> in front of the house.<em>Parking is available along the road.</em></span><span data-lang="de">Achten Sie auf das <strong>gelbe Imkerschild</strong> vor dem Haus.<em>Parkmöglichkeiten entlang der Straße.</em></span><span data-lang="it">Cercate il <strong>cartello giallo dell'apiario</strong> davanti alla casa.<em>Parcheggio disponibile lungo la strada.</em></span></p>
+        </div>
+      </div>
+      <div class="landmark-box">
+        <span>🏔️</span>
+        <p><span data-lang="sl" class="lang-active"><strong>Orientacijska točka:</strong> Čepovan leži v dolini Čepovanske grape. Tablica z imenom vasi vas bo opozorila, da ste na pravem mestu.</span><span data-lang="en"><strong>Landmark:</strong> Čepovan lies in the Čepovanska grapa valley. The village sign will confirm you're in the right place.</span><span data-lang="de"><strong>Orientierungspunkt:</strong> Čepovan liegt im Čepovanska-grapa-Tal. Das Ortsschild bestätigt, dass Sie am richtigen Ort sind.</span><span data-lang="it"><strong>Punto di riferimento:</strong> Čepovan si trova nella valle di Čepovanska grapa. Il cartello del villaggio confermerà che siete nel posto giusto.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTAKTNI OBRAZEC -->
+  <h2 class="section-title">
+    <span data-lang="sl" class="lang-active">✉️ Pišite nam</span>
+    <span data-lang="en">✉️ Contact us</span>
+    <span data-lang="de">✉️ Schreiben Sie uns</span>
+    <span data-lang="it">✉️ Contattateci</span>
+  </h2>
+  <div class="contact-form-box">
+    <!--
+      NAVODILO: Ta obrazec pošilja sporočila prek Formspree (brezplačno do 50 sporočil/mesec).
+      1. Registrirajte se na https://formspree.io
+      2. Ustvarite nov obrazec in kopirajte vašo endpoint URL
+      3. Zamenjajte action="https://formspree.io/f/VAŠA_ID" spodaj z vašo URL
+      Za captcho: v Formspree nastavitvah vklopite hCaptcha ALI pustite kot je —
+      hCaptcha widget je že vključen spodaj (testni ključ, zamenjajte z vašim s hcaptcha.com)
+   -->
+    <form id="contact-form" action="https://formspree.io/f/VAŠA_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ime"><span data-lang="sl" class="lang-active">Ime</span><span data-lang="en">Name</span><span data-lang="de">Name</span><span data-lang="it">Nome</span></label>
+          <input type="text" id="ime" name="ime" required placeholder="Janez Novak" />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="janez@primer.si" />
+        </div>
+        <div class="form-group full">
+          <label for="zadeva"><span data-lang="sl" class="lang-active">Zadeva</span><span data-lang="en">Subject</span><span data-lang="de">Betreff</span><span data-lang="it">Oggetto</span></label>
+          <select id="zadeva" name="zadeva">
+            <option value="" disabled selected>—</option>
+            <option data-lang="sl" value="Naročilo medu">Naročilo medu</option>
+            <option data-lang="en" value="Honey order">Honey order</option>
+            <option data-lang="de" value="Honigbestellung">Honigbestellung</option>
+            <option data-lang="it" value="Ordine miele">Ordine miele</option>
+            <option data-lang="sl" value="Splošno vprašanje">Splošno vprašanje</option>
+            <option data-lang="en" value="General enquiry">General enquiry</option>
+            <option data-lang="de" value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+            <option data-lang="it" value="Informazioni generali">Informazioni generali</option>
+            <option data-lang="sl" value="Obisk čebelnjaka">Obisk čebelnjaka</option>
+            <option data-lang="en" value="Visit the apiary">Visit the apiary</option>
+            <option data-lang="de" value="Besuch des Bienenstocks">Besuch des Bienenstocks</option>
+            <option data-lang="it" value="Visita all'apiario">Visita all'apiario</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="sporocilo"><span data-lang="sl" class="lang-active">Sporočilo</span><span data-lang="en">Message</span><span data-lang="de">Nachricht</span><span data-lang="it">Messaggio</span></label>
+          <textarea id="sporocilo" name="sporocilo" required></textarea>
+        </div>
+      </div>
+
+      <!-- hCaptcha widget
+           Zamenjajte data-sitekey z vašim ključem iz https://dashboard.hcaptcha.com
+           Testni ključ "10000000-ffff-ffff-ffff-000000000001" deluje lokalno brez verifikacije.
+		-->
+      <div class="captcha-row">
+        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span data-lang="sl" class="lang-active">📨 Pošlji sporočilo</span>
+        <span data-lang="en">📨 Send message</span>
+        <span data-lang="de">📨 Nachricht senden</span>
+        <span data-lang="it">📨 Invia messaggio</span>
+      </button>
+    </form>
+    <div class="form-success" id="form-success">
+      <span data-lang="sl" class="lang-active">✅ Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.</span>
+      <span data-lang="en">✅ Thank you! Your message has been sent. We'll get back to you shortly.</span>
+      <span data-lang="de">✅ Danke! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.</span>
+      <span data-lang="it">✅ Grazie! Il vostro messaggio è stato inviato. Vi risponderemo a breve.</span>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  🐝 Čebelarstvo Urbanc &copy; <span id="year"></span> —
+
+  <span data-lang="sl" class="lang-active">Naravni med iz Slovenije</span>
+  <span data-lang="en">Natural honey from Slovenia</span>
+  <span data-lang="de">Natürlicher Honig aus Slowenien</span>
+  <span data-lang="it">Miele naturale dalla Slovenia</span>
+</footer>
+
+<script>
+	
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Jezik
+  function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('lang-active', el.dataset.lang === lang);
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  document.querySelectorAll('select option[data-lang]').forEach(opt => {
+    opt.hidden = opt.dataset.lang !== lang;
+  });
+}
+
+  // Tabs
+  function showTab(id, btn) {
+    document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Obrazec — async submit prek Formspree
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        alert('Napaka pri pošiljanju. Prosimo, poskusite znova.');
+      }
+    } catch {
+      alert('Napaka pri pošiljanju. Prosimo, preverite internetno povezavo.');
+    }
+  });
+
+  // Ob nalaganju nastavi pravilne select opcije
+  setLang('sl');
+  document.querySelectorAll('select option[data-lang]').forEach(opt => {
+    opt.hidden = opt.dataset.lang !== 'sl';
+  });
+</script>
+
+</body>
+</html>
