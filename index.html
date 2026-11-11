@@ -124,8 +124,20 @@
 
     /* ---------- ZIMSKI NAČIN (body.winter) ---------- */
     body.winter {
-      --paper: #F6F8FA; --paper-2: #E7EEF3; --line: #D6DFE7; --line-2: #C4D0DA; --tan: #AEBDCA;
+      --paper: #EEF4FA; --paper-2: #DCE8F4; --line: #C9D9E8; --line-2: #B4C9DD; --tan: #9DB6CE;
+      --ink: #1D2B45; --ink-2: #3A4D6A; --muted: #5C6F8A;
     }
+    body.winter a { color: #2D5A8C; }
+    body.winter .btn-dark { color: #F2F6FB; }
+    body.winter .btn-dark:hover { background: #2C406A; color: #F2F6FB; }
+    body.winter .lang-btn.active { color: #F2F6FB; }
+    body.winter .hero-comb { display: none; }
+    body.winter .honey-card:not(.soldout) { background: #F7FAFD; }
+    body.winter .contact-card { background: #F7FAFD; }
+    .crystal { position: absolute; top: -30px; color: #fff; animation: fall linear infinite; filter: drop-shadow(0 0 3px rgba(90,130,180,.55)); }
+    .crystal svg { display: block; width: 100%; height: 100%; animation: spin linear infinite; animation-duration: inherit; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .winter-decor { position: absolute; pointer-events: none; color: #B8CDE3; }
     .winter-only { display: none; }
     body.winter .winter-only { display: revert; }
     body.winter .summer-only { display: none; }
@@ -371,6 +383,7 @@
 
 <!-- HERO -->
 <header class="hero">
+  <div class="winter-only" aria-hidden="true"><span class="winter-decor" style="left: 46%; top: 70px; width: 90px; height: 90px"><svg viewBox="-50 -50 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><g transform="rotate(0)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(60)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(120)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(180)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(240)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(300)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><circle r="5"/></svg></span><span class="winter-decor" style="left: 2%; top: 20px; width: 56px; height: 56px"><svg viewBox="-50 -50 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><g transform="rotate(0)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(60)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(120)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(180)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(240)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(300)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><circle r="5"/></svg></span><span class="winter-decor" style="right: 3%; top: 40px; width: 120px; height: 120px"><svg viewBox="-50 -50 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><g transform="rotate(0)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(60)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(120)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(180)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(240)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(300)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><circle r="5"/></svg></span><span class="winter-decor" style="left: 38%; bottom: 40px; width: 64px; height: 64px"><svg viewBox="-50 -50 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><g transform="rotate(0)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(60)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(120)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(180)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(240)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><g transform="rotate(300)"><path d="M0 0 V-44 M0 -16 L-10 -26 M0 -16 L10 -26 M0 -30 L-8 -38 M0 -30 L8 -38"/></g><circle r="5"/></svg></span></div>
   <svg class="hero-comb" width="420" height="360" viewBox="0 0 420 360" aria-hidden="true"><g fill="none" stroke="#E39B1B" stroke-width="1.5"><path d="M60 20 L100 43 V89 L60 112 L20 89 V43 Z"/><path d="M140 20 L180 43 V89 L140 112 L100 89 V43 Z"/><path d="M220 20 L260 43 V89 L220 112 L180 89 V43 Z"/><path d="M100 89 L140 112 V158 L100 181 L60 158 V112 Z"/><path d="M180 89 L220 112 V158 L180 181 L140 158 V112 Z"/><path d="M260 89 L300 112 V158 L260 181 L220 158 V112 Z"/><path d="M140 158 L180 181 V227 L140 250 L100 227 V181 Z"/><path d="M220 158 L260 181 V227 L220 250 L180 227 V181 Z"/></g></svg>
   <div class="container">
     <div class="hero-text">
@@ -388,7 +401,7 @@
     </div>
     <div class="hero-media">
       <img src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
-      <svg class="hero-snow winter-only" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 Q60 20 120 50 T240 44 T400 40 V120 H0 Z" fill="#E9F0F5"/><path d="M0 84 Q80 56 170 78 T400 70 V120 H0 Z" fill="#FFFFFF"/></svg>
+      <svg class="hero-snow winter-only" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 Q60 20 120 50 T240 44 T400 40 V120 H0 Z" fill="#D6E5F3"/><path d="M0 84 Q80 56 170 78 T400 70 V120 H0 Z" fill="#FFFFFF"/></svg>
       <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="10.5" font-weight="700" fill="#2B1D0E"><textPath href="#stampRing" textLength="334" lengthAdjust="spacingAndGlyphs" data-i18n="hero.stamp" data-i18n-winter="w.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
       <svg class="hero-bee" width="220" height="90" viewBox="0 0 220 90" aria-hidden="true"><path d="M4 70 C40 20 80 90 120 50 S190 10 200 30" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-dasharray="4 6" stroke-linecap="round"/><g transform="translate(196 14)"><ellipse cx="10" cy="14" rx="9" ry="6.5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.6"/><path d="M7 8.5 V19.5 M12 8.5 V19.5" stroke="#2B1D0E" stroke-width="1.6"/><ellipse cx="6" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/><ellipse cx="14" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/></g></svg>
     </div>
@@ -919,7 +932,17 @@
   if (WINTER) {
     document.body.classList.add('winter');
     const snow = document.createElement('div'); snow.className = 'snow'; snow.setAttribute('aria-hidden', 'true');
-    for (let i = 0; i < 70; i++) {
+    const crystalSvg = '<svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">' +
+      [0, 60, 120, 180, 240, 300].map(a => `<g transform="rotate(${a})"><path d="M0 0 V-44 M0 -18 L-12 -30 M0 -18 L12 -30"/></g>`).join('') + '</svg>';
+    for (let i = 0; i < 28; i++) {
+      const c = document.createElement('span'); c.className = 'crystal';
+      const size = 10 + Math.random() * 14;
+      c.style.cssText = `left:${Math.random() * 100}vw;width:${size}px;height:${size}px;opacity:${0.6 + Math.random() * 0.4};` +
+        `animation-duration:${11 + Math.random() * 12}s;animation-delay:${-Math.random() * 22}s;--drift:${(Math.random() * 120 - 60).toFixed(0)}px`;
+      c.innerHTML = crystalSvg;
+      snow.appendChild(c);
+    }
+    for (let i = 0; i < 90; i++) {
       const f = document.createElement('span'); f.className = 'flake';
       const size = 2 + Math.random() * 5;
       f.style.cssText = `left:${Math.random() * 100}vw;width:${size}px;height:${size}px;opacity:${0.5 + Math.random() * 0.5};` +
