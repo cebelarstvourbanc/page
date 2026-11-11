@@ -112,7 +112,11 @@
       transition: transform .15s, box-shadow .15s;
     }
     .honey-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(43,29,14,.08); }
-    .honey-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .honey-img { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+    .honey-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .honey-img .photo { opacity: 0; transform: scale(1.04); transition: opacity .45s ease, transform .6s ease; }
+    .honey-card:hover .photo, .honey-card.show-photo .photo { opacity: 1; transform: scale(1); }
+    .honey-card:has(.photo) .honey-img { cursor: pointer; }
     .honey-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
     .honey-card h3 { font-size: 26px; }
     .honey-card .desc { color: var(--ink-2); font-size: 15px; }
@@ -129,7 +133,7 @@
     .price { font-weight: 700; }
     .honey-card.soldout { background: transparent; border: 1.5px dashed var(--tan); }
     .honey-card.soldout:hover { transform: none; box-shadow: none; }
-    .honey-card.soldout img { opacity: 0.6; }
+    .honey-card.soldout .honey-img img:not(.photo) { opacity: 0.6; }
     .honey-card.soldout h3, .honey-card.soldout .desc { color: var(--muted); }
     .honey-card.soldout .status { color: var(--red); }
     .honey-card.soldout .status::before { background: transparent; border: 2px solid var(--red); }
@@ -299,7 +303,10 @@
     <div class="honey-grid">
       <!-- Za razprodan med kartici dodajte razred "soldout", status "status.soldout" in namesto cen <p class="price" data-i18n="status.nextHarvest">. -->
       <article class="honey-card">
-        <img src="img/lipa.svg" alt="Lipa v cvetu" data-i18n-alt="img.linden" loading="lazy" width="400" height="500">
+        <div class="honey-img">
+          <img src="img/lipa.svg" alt="Lipa v cvetu" data-i18n-alt="img.linden" loading="lazy" width="400" height="500">
+          <img class="photo" src="img/foto-lipa.jpg" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">
+        </div>
         <div class="honey-body">
           <h3 data-i18n="honey.linden">Lipov med</h3>
           <p class="desc" data-i18n="honey.linden.desc">Nežen in aromatičen, z blagim cvetličnim okusom.</p>
@@ -307,7 +314,10 @@
         </div>
       </article>
       <article class="honey-card">
-        <img src="img/kostanj.svg" alt="Kostanj" data-i18n-alt="img.chestnut" loading="lazy" width="400" height="500">
+        <div class="honey-img">
+          <img src="img/kostanj.svg" alt="Kostanj" data-i18n-alt="img.chestnut" loading="lazy" width="400" height="500">
+          <img class="photo" src="img/foto-kostanj.jpg" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">
+        </div>
         <div class="honey-body">
           <h3 data-i18n="honey.chestnut">Kostanjev med</h3>
           <p class="desc" data-i18n="honey.chestnut.desc">Temen in močan, z značilnim rahlo grenkim okusom.</p>
@@ -315,7 +325,10 @@
         </div>
       </article>
       <article class="honey-card">
-        <img src="img/gozd.svg" alt="Gozd" data-i18n-alt="img.forest" loading="lazy" width="400" height="500">
+        <div class="honey-img">
+          <img src="img/gozd.svg" alt="Gozd" data-i18n-alt="img.forest" loading="lazy" width="400" height="500">
+          <img class="photo" src="img/foto-gozd.jpg" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">
+        </div>
         <div class="honey-body">
           <h3 data-i18n="honey.forest">Gozdni med</h3>
           <p class="desc" data-i18n="honey.forest.desc">Bogat, temnejši med z intenzivnim okusom.</p>
@@ -323,7 +336,10 @@
         </div>
       </article>
       <article class="honey-card soldout">
-        <img src="img/akacija.svg" alt="Akacija v cvetu" data-i18n-alt="img.acacia" loading="lazy" width="400" height="500">
+        <div class="honey-img">
+          <img src="img/akacija.svg" alt="Akacija v cvetu" data-i18n-alt="img.acacia" loading="lazy" width="400" height="500">
+          <img class="photo" src="img/foto-akacija.jpg" alt="" aria-hidden="true" loading="lazy" onerror="this.remove()">
+        </div>
         <div class="honey-body">
           <h3 data-i18n="honey.acacia">Akacijev med</h3>
           <p class="desc" data-i18n="honey.acacia.desc">Svetel, tekoč in posebno sladek.</p>
@@ -714,6 +730,11 @@
   }
 
   document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+  // Kartice medu: ob dotiku (telefon) preklopi med risbo in fotografijo
+  document.querySelectorAll('.honey-img').forEach(box => box.addEventListener('click', () => {
+    if (box.querySelector('.photo')) box.closest('.honey-card').classList.toggle('show-photo');
+  }));
 
   // Map tabs
   document.querySelectorAll('.map-tab').forEach(tab => tab.addEventListener('click', () => {
