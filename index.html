@@ -138,7 +138,8 @@
     .crystal svg { display: block; width: 100%; height: 100%; animation: spin linear infinite; animation-duration: inherit; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .winter-decor { position: absolute; pointer-events: none; color: #B8CDE3; }
-    .winter-only { display: none; }
+    .winter-only, .december-only { display: none; }
+    body.december .december-only { display: revert; }
     body.winter .winter-only { display: revert; }
     body.winter .summer-only { display: none; }
     .snow { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
@@ -454,7 +455,7 @@
 </section>
 
 <!-- ZIMA: praznična darila -->
-<section class="gift winter-only">
+<section class="gift december-only">
   <div class="gift-box">
     <svg width="72" height="72" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#F2CF6B" stroke-width="2" stroke-linejoin="round"><rect x="8" y="26" width="48" height="32" rx="3"/><rect x="4" y="18" width="56" height="10" rx="2"/><path d="M32 18 V58"/><path d="M32 18 C26 8 14 8 16 14 C18 19 28 18 32 18 C36 18 46 19 48 14 C50 8 38 8 32 18 Z"/></svg>
     <div class="gift-text">
@@ -927,13 +928,15 @@
     }
   };
 
-  // Zimski način: trenutno izklopljen (vklop: nastavi WINTER_UNTIL na prihodnji datum).
-  // Za predogled: #zima vklopi.
-  const WINTER_UNTIL = null; // npr. new Date('2027-03-01T00:00:00')
+  // Zimski način: samodejno od 1. decembra do konca februarja, vsako leto.
+  // Pas s prazničnimi darili samo decembra.
+  // Za predogled: #zima vklopi (z darili), #poletje izklopi.
+  const month = new Date().getMonth() + 1; // 1 = januar … 12 = december
   const WINTER = location.hash === '#zima' ||
-    (location.hash !== '#poletje' && ((WINTER_UNTIL && new Date() < WINTER_UNTIL) || document.body.classList.contains('winter')));
+    (location.hash !== '#poletje' && (month === 12 || month <= 2));
   if (WINTER) {
     document.body.classList.add('winter');
+    if (month === 12 || location.hash === '#zima') document.body.classList.add('december');
     const snow = document.createElement('div'); snow.className = 'snow'; snow.setAttribute('aria-hidden', 'true');
     const crystalSvg = '<svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">' +
       [0, 60, 120, 180, 240, 300].map(a => `<g transform="rotate(${a})"><path d="M0 0 V-44 M0 -18 L-12 -30 M0 -18 L12 -30"/></g>`).join('') + '</svg>';
