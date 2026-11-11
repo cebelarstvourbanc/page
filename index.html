@@ -122,6 +122,37 @@
     .btn-wa { background: #E7F3E4; color: #1F5130; }
     .btn-wa:hover { background: #D3EBCD; color: #1F5130; }
 
+    /* ---------- ZIMSKI NAČIN (body.winter) ---------- */
+    body.winter {
+      --paper: #F6F8FA; --paper-2: #E7EEF3; --line: #D6DFE7; --line-2: #C4D0DA; --tan: #AEBDCA;
+    }
+    .winter-only { display: none; }
+    body.winter .winter-only { display: revert; }
+    body.winter .summer-only { display: none; }
+    .snow { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+    .flake { position: absolute; top: -12px; border-radius: 50%; background: #fff; box-shadow: 0 0 4px rgba(120,150,180,.6); animation: fall linear infinite; }
+    @keyframes fall { to { transform: translate(var(--drift), 108vh); } }
+    @media (prefers-reduced-motion: reduce) { .snow { display: none; } }
+    body.winter .hero-media img { filter: saturate(.55) brightness(1.08) contrast(.95) hue-rotate(-8deg); }
+    .hero-snow { position: absolute; left: 0; right: 20px; bottom: 20px; width: calc(100% - 20px); height: auto; border-radius: 0 0 24px 24px; pointer-events: none; }
+    body.winter .honey-card { position: relative; }
+    body.winter .honey-card::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 26px; z-index: 2; pointer-events: none;
+      background:
+        radial-gradient(circle at 14px 0, #fff 15px, transparent 16px) 0 0 / 28px 26px repeat-x,
+        linear-gradient(#fff, #fff) 0 0 / 100% 6px no-repeat;
+      filter: drop-shadow(0 2px 2px rgba(80,110,140,.25));
+    }
+    .gift { padding: 0 24px 64px; }
+    .gift-box {
+      max-width: 1160px; margin: 0 auto; background: var(--ink); color: var(--paper); border-radius: 24px;
+      padding: 32px 36px; display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: center; position: relative; overflow: hidden;
+    }
+    .gift-box h2 { font-size: clamp(28px, 4vw, 38px); color: #F2CF6B; }
+    .gift-box p { color: #E6D6BC; max-width: 520px; }
+    .gift-text { flex: 1 1 420px; display: flex; flex-direction: column; gap: 10px; }
+    .gift-box .btn { flex-shrink: 0; }
+
     /* ---------- HONEYS ---------- */
     .honeys { background: var(--paper-2); padding: 80px 24px; }
     .honeys-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -343,9 +374,12 @@
   <svg class="hero-comb" width="420" height="360" viewBox="0 0 420 360" aria-hidden="true"><g fill="none" stroke="#E39B1B" stroke-width="1.5"><path d="M60 20 L100 43 V89 L60 112 L20 89 V43 Z"/><path d="M140 20 L180 43 V89 L140 112 L100 89 V43 Z"/><path d="M220 20 L260 43 V89 L220 112 L180 89 V43 Z"/><path d="M100 89 L140 112 V158 L100 181 L60 158 V112 Z"/><path d="M180 89 L220 112 V158 L180 181 L140 158 V112 Z"/><path d="M260 89 L300 112 V158 L260 181 L220 158 V112 Z"/><path d="M140 158 L180 181 V227 L140 250 L100 227 V181 Z"/><path d="M220 158 L260 181 V227 L220 250 L180 227 V181 Z"/></g></svg>
   <div class="container">
     <div class="hero-text">
-      <span class="eyebrow" data-i18n="hero.eyebrow">Družinsko čebelarstvo · Čepovan</span>
-      <h1 data-i18n="hero.title">Med iz<br><em>Čepovanske</em><br>doline</h1>
-      <p class="hero-lead" data-i18n="hero.lead">Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.</p>
+      <span class="eyebrow summer-only" data-i18n="hero.eyebrow">Družinsko čebelarstvo · Čepovan</span>
+      <span class="eyebrow winter-only" data-i18n="w.eyebrow">Zima v Čepovanu</span>
+      <h1 class="summer-only" data-i18n="hero.title">Med iz<br><em>Čepovanske</em><br>doline</h1>
+      <h1 class="winter-only" data-i18n="w.title">Topel med<br>za <em>mrzle</em><br>dni</h1>
+      <p class="hero-lead winter-only" data-i18n="w.lead">Žlička medu v čaju, kozarec vročega mleka z medom pred spanjem … Zima je čas za med. In kozarec domačega medu je tudi lepo praznično darilo.</p>
+      <p class="hero-lead summer-only" data-i18n="hero.lead">Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.</p>
       <div class="hero-actions">
         <a class="btn btn-dark" href="#medi" data-i18n="hero.cta">Izberite svoj med</a>
         <a class="btn btn-link" href="#obisk"><span data-i18n="hero.cta2">Obiščite nas</span>
@@ -354,7 +388,8 @@
     </div>
     <div class="hero-media">
       <img src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
-      <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="10.5" font-weight="700" fill="#2B1D0E"><textPath href="#stampRing" textLength="334" lengthAdjust="spacingAndGlyphs" data-i18n="hero.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
+      <svg class="hero-snow winter-only" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 Q60 20 120 50 T240 44 T400 40 V120 H0 Z" fill="#E9F0F5"/><path d="M0 84 Q80 56 170 78 T400 70 V120 H0 Z" fill="#FFFFFF"/></svg>
+      <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="10.5" font-weight="700" fill="#2B1D0E"><textPath href="#stampRing" textLength="334" lengthAdjust="spacingAndGlyphs" data-i18n="hero.stamp" data-i18n-winter="w.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
       <svg class="hero-bee" width="220" height="90" viewBox="0 0 220 90" aria-hidden="true"><path d="M4 70 C40 20 80 90 120 50 S190 10 200 30" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-dasharray="4 6" stroke-linecap="round"/><g transform="translate(196 14)"><ellipse cx="10" cy="14" rx="9" ry="6.5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.6"/><path d="M7 8.5 V19.5 M12 8.5 V19.5" stroke="#2B1D0E" stroke-width="1.6"/><ellipse cx="6" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/><ellipse cx="14" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/></g></svg>
     </div>
   </div>
@@ -402,6 +437,18 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ZIMA: praznična darila -->
+<section class="gift winter-only">
+  <div class="gift-box">
+    <svg width="72" height="72" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#F2CF6B" stroke-width="2" stroke-linejoin="round"><rect x="8" y="26" width="48" height="32" rx="3"/><rect x="4" y="18" width="56" height="10" rx="2"/><path d="M32 18 V58"/><path d="M32 18 C26 8 14 8 16 14 C18 19 28 18 32 18 C36 18 46 19 48 14 C50 8 38 8 32 18 Z"/></svg>
+    <div class="gift-text">
+      <h2 data-i18n="w.gift.title">Med za praznična darila</h2>
+      <p data-i18n="w.gift.text">Kozarec domačega medu je darilo, ki ga vsak porabi. Pokličite nas in skupaj izberemo sorte in velikosti za vaša darila.</p>
+    </div>
+    <a class="btn btn-honey" href="#kontakt" data-i18n="w.gift.cta">Pokličite nas</a>
   </div>
 </section>
 
@@ -524,6 +571,14 @@
     <g class="bear-tongue">
       <path d="M132 157 Q150 176 166 156 Q166 144 154 146 Q144 152 132 157 Z" fill="#E86F7E" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/>
       <path d="M150 152 Q153 160 150 165" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
+    </g>
+    <g class="winter-only">
+      <path d="M-14 182 Q46 200 108 186 L110 208 Q46 224 -14 204 Z" fill="#2E6A8E" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M20 192 L18 212 M50 196 L50 216 M80 194 L82 212" stroke="#F4E9D0" stroke-width="4"/>
+      <path d="M-46 92 Q-40 22 38 26 Q108 32 120 88 Q40 64 -46 92 Z" fill="#C4572F" stroke="#2B1D0E" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M-48 96 Q38 64 122 92 L118 76 Q38 50 -50 80 Z" fill="#F4E9D0" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M0 50 Q8 40 12 58 M30 36 Q38 28 42 48 M62 38 Q72 34 74 54" fill="none" stroke="#9E3F22" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="70" cy="24" r="16" fill="#FFFFFF" stroke="#2B1D0E" stroke-width="3"/>
     </g>
     <g transform="translate(78 196)">
       <ellipse cx="22" cy="14" rx="32" ry="21" fill="#8A5A2B" stroke="#2B1D0E" stroke-width="3.5"/>
@@ -652,7 +707,8 @@
     sl: {
       'brand': 'Čebelarstvo Urbanc',
       'role.head': 'Glavni čebelar', 'role.beekeeper': 'Čebelar', 'role.helper': 'Pomočnik čebelarja', 'nav.contact': 'Kontakt', 'contact.title': 'Pokličite ali pišite nam', 'contact.lead': 'Za naročila in vprašanja smo dosegljivi po telefonu in WhatsAppu.', 'contact.call': 'Pokliči',
-      'lb.close': 'Zapri', 'lb.prev': 'Prejšnja slika', 'lb.next': 'Naslednja slika', 'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
+      'lb.close': 'Zapri', 'lb.prev': 'Prejšnja slika', 'lb.next': 'Naslednja slika', 'w.eyebrow': 'Zima v Čepovanu', 'w.title': 'Topel med<br>za <em>mrzle</em><br>dni', 'w.lead': 'Žlička medu v čaju, kozarec vročega mleka z medom pred spanjem … Zima je čas za med. In kozarec domačega medu je tudi lepo praznično darilo.', 'w.stamp': 'TOPEL MED ZA MRZLE DNI · ČEPOVAN ·', 'w.gift.title': 'Med za praznična darila', 'w.gift.text': 'Kozarec domačega medu je darilo, ki ga vsak porabi. Pokličite nas in skupaj izberemo sorte in velikosti za vaša darila.', 'w.gift.cta': 'Pokličite nas',
+      'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
       'hero.eyebrow': 'Družinsko čebelarstvo · Čepovan',
       'hero.title': 'Med iz<br><em>Čepovanske</em><br>doline',
       'hero.lead': 'Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.',
@@ -703,7 +759,8 @@
     en: {
       'brand': 'Urbanc Beekeeping',
       'role.head': 'Head beekeeper', 'role.beekeeper': 'Beekeeper', 'role.helper': 'Beekeeper’s helper', 'nav.contact': 'Contact', 'contact.title': 'Call or message us', 'contact.lead': 'For orders and questions, reach us by phone or WhatsApp.', 'contact.call': 'Call',
-      'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
+      'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warm honey<br>for <em>cold</em><br>days', 'w.lead': 'A spoonful of honey in your tea, a glass of hot milk with honey before bed … Winter is honey season. And a jar of homemade honey makes a lovely holiday gift.', 'w.stamp': 'WARM HONEY FOR COLD DAYS · ČEPOVAN ·', 'w.gift.title': 'Honey for holiday gifts', 'w.gift.text': 'A jar of homemade honey is a gift everyone uses. Call us and we’ll help you choose varieties and sizes for your gifts.', 'w.gift.cta': 'Call us',
+      'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
       'hero.eyebrow': 'Family beekeepers · Čepovan',
       'hero.title': 'Honey from<br>the <em>Čepovan</em><br>Valley',
       'hero.lead': 'Our bees gather nectar in the unspoilt nature of the Čepovan Valley. We extract our honey by hand, in small batches, with nothing added.',
@@ -754,7 +811,8 @@
     de: {
       'brand': 'Imkerei Urbanc',
       'role.head': 'Imkermeister', 'role.beekeeper': 'Imker', 'role.helper': 'Imkergehilfe', 'nav.contact': 'Kontakt', 'contact.title': 'Rufen Sie uns an oder schreiben Sie uns', 'contact.lead': 'Für Bestellungen und Fragen erreichen Sie uns telefonisch oder per WhatsApp.', 'contact.call': 'Anrufen',
-      'lb.close': 'Schließen', 'lb.prev': 'Vorheriges Foto', 'lb.next': 'Nächstes Foto', 'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
+      'lb.close': 'Schließen', 'lb.prev': 'Vorheriges Foto', 'lb.next': 'Nächstes Foto', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warmer Honig<br>für <em>kalte</em><br>Tage', 'w.lead': 'Ein Löffel Honig im Tee, ein Glas heiße Milch mit Honig vor dem Schlafen … Der Winter ist Honigzeit. Und ein Glas hausgemachter Honig ist ein schönes Festtagsgeschenk.', 'w.stamp': 'WARMER HONIG FÜR KALTE TAGE · ČEPOVAN ·', 'w.gift.title': 'Honig als Festtagsgeschenk', 'w.gift.text': 'Ein Glas hausgemachter Honig ist ein Geschenk, das jeder verwendet. Rufen Sie uns an – wir helfen Ihnen, Sorten und Größen auszuwählen.', 'w.gift.cta': 'Rufen Sie uns an',
+      'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
       'hero.eyebrow': 'Familienimkerei · Čepovan',
       'hero.title': 'Honig<br>aus dem<br><em>Čepovan</em>-Tal',
       'hero.lead': 'Unsere Bienen sammeln Nektar in der unberührten Natur des Čepovan-Tals. Wir schleudern unseren Honig von Hand, in kleinen Mengen und ohne Zusätze.',
@@ -805,7 +863,8 @@
     it: {
       'brand': 'Apicoltura Urbanc',
       'role.head': 'Apicoltore capo', 'role.beekeeper': 'Apicoltore', 'role.helper': 'Aiuto apicoltore', 'nav.contact': 'Contatti', 'contact.title': 'Chiamateci o scriveteci', 'contact.lead': 'Per ordini e domande siamo raggiungibili per telefono e su WhatsApp.', 'contact.call': 'Chiama',
-      'lb.close': 'Chiudi', 'lb.prev': 'Foto precedente', 'lb.next': 'Foto successiva', 'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
+      'lb.close': 'Chiudi', 'lb.prev': 'Foto precedente', 'lb.next': 'Foto successiva', 'w.eyebrow': 'Inverno a Čepovan', 'w.title': 'Miele caldo<br>per giornate<br><em>fredde</em>', 'w.lead': 'Un cucchiaino di miele nel tè, un bicchiere di latte caldo con miele prima di dormire … L’inverno è la stagione del miele. E un vasetto di miele fatto in casa è un bel regalo per le feste.', 'w.stamp': 'MIELE CALDO PER GIORNATE FREDDE · ČEPOVAN ·', 'w.gift.title': 'Miele per i regali di festa', 'w.gift.text': 'Un vasetto di miele fatto in casa è un regalo che tutti usano. Chiamateci e vi aiuteremo a scegliere varietà e formati per i vostri regali.', 'w.gift.cta': 'Chiamateci',
+      'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
       'hero.eyebrow': 'Apicoltura di famiglia · Čepovan',
       'hero.title': 'Miele<br>della valle<br>di <em>Čepovan</em>',
       'hero.lead': 'Le nostre api raccolgono il nettare nella natura incontaminata della valle di Čepovan. Smieliamo a mano, in piccoli lotti e senza aggiunte.',
@@ -855,6 +914,21 @@
     }
   };
 
+  // Zimski način: #zima v naslovu (predogled) — kasneje lahko samodejno dec–feb
+  const WINTER = location.hash === '#zima' || document.body.classList.contains('winter');
+  if (WINTER) {
+    document.body.classList.add('winter');
+    const snow = document.createElement('div'); snow.className = 'snow'; snow.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 70; i++) {
+      const f = document.createElement('span'); f.className = 'flake';
+      const size = 2 + Math.random() * 5;
+      f.style.cssText = `left:${Math.random() * 100}vw;width:${size}px;height:${size}px;opacity:${0.5 + Math.random() * 0.5};` +
+        `animation-duration:${8 + Math.random() * 10}s;animation-delay:${-Math.random() * 18}s;--drift:${(Math.random() * 80 - 40).toFixed(0)}px`;
+      snow.appendChild(f);
+    }
+    document.body.appendChild(snow);
+  }
+
   let currentLang = 'sl';
   const t = (key) => (I18N[currentLang] && I18N[currentLang][key]) ?? I18N.sl[key] ?? '';
 
@@ -863,7 +937,7 @@
     currentLang = lang;
     document.documentElement.lang = lang;
     document.title = t('title');
-    document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t((WINTER && el.dataset.i18nWinter) || el.dataset.i18n); });
     document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t(el.dataset.i18nAlt); });
     document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
