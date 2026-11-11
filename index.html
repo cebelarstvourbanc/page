@@ -927,11 +927,11 @@
     }
   };
 
-  // Zimski način: vklopljen do WINTER_UNTIL (nato se sam izklopi).
-  // Za predogled: #zima vklopi, #poletje izklopi.
-  const WINTER_UNTIL = new Date('2027-03-01T00:00:00');
+  // Zimski način: trenutno izklopljen (vklop: nastavi WINTER_UNTIL na prihodnji datum).
+  // Za predogled: #zima vklopi.
+  const WINTER_UNTIL = null; // npr. new Date('2027-03-01T00:00:00')
   const WINTER = location.hash === '#zima' ||
-    (location.hash !== '#poletje' && (new Date() < WINTER_UNTIL || document.body.classList.contains('winter')));
+    (location.hash !== '#poletje' && ((WINTER_UNTIL && new Date() < WINTER_UNTIL) || document.body.classList.contains('winter')));
   if (WINTER) {
     document.body.classList.add('winter');
     const snow = document.createElement('div'); snow.className = 'snow'; snow.setAttribute('aria-hidden', 'true');
