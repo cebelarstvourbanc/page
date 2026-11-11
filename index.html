@@ -203,6 +203,22 @@
     .faq-list details[open] summary::after { transform: rotate(45deg); }
     .faq-list details p { margin-top: 10px; color: var(--ink-2); max-width: 640px; }
 
+    .faq { position: relative; overflow: hidden; }
+    .bear { position: absolute; left: 0; bottom: 0; width: 300px; height: 300px; transition: transform .35s ease; transform: translateX(-14px); }
+    .faq:hover .bear { transform: translateX(0); }
+    .bear-tongue { transform-box: fill-box; transform-origin: 0% 50%; animation: lick 2.8s ease-in-out infinite; }
+    @keyframes lick {
+      0%, 55%, 100% { transform: rotate(0deg) translateY(0); }
+      65% { transform: rotate(-16deg) translateY(-3px); }
+      75% { transform: rotate(4deg) translateY(1px); }
+      85% { transform: rotate(-12deg) translateY(-2px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .bear-tongue { animation: none; } .bear { transition: none; } }
+    @media (max-width: 760px) {
+      .faq { padding-bottom: 150px; }
+      .bear { width: 150px; height: 150px; }
+    }
+
     /* ---------- VISIT + CONTACT ---------- */
     .visit { background: var(--ink); color: var(--paper); padding: 88px 24px; }
     .visit .container { display: flex; flex-wrap: wrap; gap: 56px; }
@@ -494,6 +510,27 @@
 
 <!-- VPRAŠANJA -->
 <section class="faq" id="vprasanja">
+  <svg class="bear" viewBox="0 0 230 230" width="230" height="230" aria-hidden="true">
+    <circle cx="58" cy="50" r="26" fill="#8A5A2B" stroke="#2B1D0E" stroke-width="3.5"/>
+    <circle cx="60" cy="52" r="13" fill="#E9A98F"/>
+    <circle cx="36" cy="124" r="84" fill="#8A5A2B" stroke="#2B1D0E" stroke-width="3.5"/>
+    <ellipse cx="120" cy="142" rx="44" ry="31" fill="#D9A86C" stroke="#2B1D0E" stroke-width="3.5"/>
+    <path d="M74 98 Q86 88 98 98" fill="none" stroke="#2B1D0E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M70 84 Q84 76 98 82" fill="none" stroke="#2B1D0E" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="78" cy="126" r="9" fill="#E9876B" opacity="0.45"/>
+    <ellipse cx="154" cy="128" rx="14" ry="10" fill="#2B1D0E"/>
+    <ellipse cx="150" cy="124" rx="4" ry="2.6" fill="#fff" opacity="0.7"/>
+    <path d="M154 138 Q154 154 138 158 Q124 161 112 152" fill="none" stroke="#2B1D0E" stroke-width="3.5" stroke-linecap="round"/>
+    <g class="bear-tongue">
+      <path d="M132 157 Q150 176 166 156 Q166 144 154 146 Q144 152 132 157 Z" fill="#E86F7E" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M150 152 Q153 160 150 165" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
+    </g>
+    <g transform="translate(78 196)">
+      <ellipse cx="22" cy="14" rx="30" ry="20" fill="#8A5A2B" stroke="#2B1D0E" stroke-width="3.5"/>
+      <path d="M10 2 V-6 M22 0 V-9 M34 2 V-6" stroke="#2B1D0E" stroke-width="3" stroke-linecap="round"/>
+      <path d="M26 10 Q32 22 28 30" fill="none" stroke="#E39B1B" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </svg>
   <div class="container">
     <div class="faq-intro">
       <span class="eyebrow" data-i18n="faq.eyebrow">Vprašanja</span>
