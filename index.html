@@ -146,7 +146,6 @@
     .flake { position: absolute; top: -12px; border-radius: 50%; background: #fff; box-shadow: 0 0 4px rgba(120,150,180,.6); animation: fall linear infinite; }
     @keyframes fall { to { transform: translate(var(--drift), 108vh); } }
     @media (prefers-reduced-motion: reduce) { .snow { display: none; } }
-    body.winter .hero-media img { filter: saturate(.55) brightness(1.08) contrast(.95) hue-rotate(-8deg); }
     .hero-snow { position: absolute; left: 0; right: 20px; bottom: 20px; width: calc(100% - 20px); height: auto; border-radius: 0 0 24px 24px; pointer-events: none; }
     body.winter .honey-card { position: relative; }
     body.winter .honey-card::before {
@@ -401,8 +400,8 @@
       </div>
     </div>
     <div class="hero-media">
-      <img src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
-      <svg class="hero-snow winter-only" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 Q60 20 120 50 T240 44 T400 40 V120 H0 Z" fill="#D6E5F3"/><path d="M0 84 Q80 56 170 78 T400 70 V120 H0 Z" fill="#FFFFFF"/></svg>
+      <img class="summer-only" src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
+      <img class="winter-only" src="img/cebelnjak-zima.jpg" alt="Naš čebelnjak pozimi" data-i18n-alt="w.hero.alt" width="900" height="1080">
       <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="10.5" font-weight="700" fill="#2B1D0E"><textPath href="#stampRing" textLength="334" lengthAdjust="spacingAndGlyphs" data-i18n="hero.stamp" data-i18n-winter="w.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
       <svg class="hero-bee" width="220" height="90" viewBox="0 0 220 90" aria-hidden="true"><path d="M4 70 C40 20 80 90 120 50 S190 10 200 30" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-dasharray="4 6" stroke-linecap="round"/><g transform="translate(196 14)"><ellipse cx="10" cy="14" rx="9" ry="6.5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.6"/><path d="M7 8.5 V19.5 M12 8.5 V19.5" stroke="#2B1D0E" stroke-width="1.6"/><ellipse cx="6" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/><ellipse cx="14" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/></g></svg>
     </div>
@@ -721,7 +720,7 @@
     sl: {
       'brand': 'Čebelarstvo Urbanc',
       'role.head': 'Glavni čebelar', 'role.beekeeper': 'Čebelar', 'role.helper': 'Pomočnik čebelarja', 'nav.contact': 'Kontakt', 'contact.title': 'Pokličite ali pišite nam', 'contact.lead': 'Za naročila in vprašanja smo dosegljivi po telefonu in WhatsAppu.', 'contact.call': 'Pokliči',
-      'lb.close': 'Zapri', 'lb.prev': 'Prejšnja slika', 'lb.next': 'Naslednja slika', 'w.eyebrow': 'Zima v Čepovanu', 'w.title': 'Topel med<br>za <em>mrzle</em><br>dni', 'w.lead': 'Žlička medu v čaju, kozarec vročega mleka z medom pred spanjem … Zima je čas za med. In kozarec domačega medu je tudi lepo praznično darilo.', 'w.stamp': 'TOPEL MED ZA MRZLE DNI · ČEPOVAN ·', 'w.gift.title': 'Med za praznična darila', 'w.gift.text': 'Kozarec domačega medu je darilo, ki ga vsak porabi. Pokličite nas in skupaj izberemo sorte in velikosti za vaša darila.', 'w.gift.cta': 'Pokličite nas',
+      'lb.close': 'Zapri', 'lb.prev': 'Prejšnja slika', 'lb.next': 'Naslednja slika', 'w.hero.alt': 'Naš čebelnjak pozimi', 'w.eyebrow': 'Zima v Čepovanu', 'w.title': 'Topel med<br>za <em>mrzle</em><br>dni', 'w.lead': 'Žlička medu v čaju, kozarec vročega mleka z medom pred spanjem … Zima je čas za med. In kozarec domačega medu je tudi lepo praznično darilo.', 'w.stamp': 'TOPEL MED ZA MRZLE DNI · ČEPOVAN ·', 'w.gift.title': 'Med za praznična darila', 'w.gift.text': 'Kozarec domačega medu je darilo, ki ga vsak porabi. Pokličite nas in skupaj izberemo sorte in velikosti za vaša darila.', 'w.gift.cta': 'Pokličite nas',
       'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
       'hero.eyebrow': 'Družinsko čebelarstvo · Čepovan',
       'hero.title': 'Med iz<br><em>Čepovanske</em><br>doline',
@@ -773,7 +772,7 @@
     en: {
       'brand': 'Urbanc Beekeeping',
       'role.head': 'Head beekeeper', 'role.beekeeper': 'Beekeeper', 'role.helper': 'Beekeeper’s helper', 'nav.contact': 'Contact', 'contact.title': 'Call or message us', 'contact.lead': 'For orders and questions, reach us by phone or WhatsApp.', 'contact.call': 'Call',
-      'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warm honey<br>for <em>cold</em><br>days', 'w.lead': 'A spoonful of honey in your tea, a glass of hot milk with honey before bed … Winter is honey season. And a jar of homemade honey makes a lovely holiday gift.', 'w.stamp': 'WARM HONEY FOR COLD DAYS · ČEPOVAN ·', 'w.gift.title': 'Honey for holiday gifts', 'w.gift.text': 'A jar of homemade honey is a gift everyone uses. Call us and we’ll help you choose varieties and sizes for your gifts.', 'w.gift.cta': 'Call us',
+      'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'w.hero.alt': 'Our apiary in winter', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warm honey<br>for <em>cold</em><br>days', 'w.lead': 'A spoonful of honey in your tea, a glass of hot milk with honey before bed … Winter is honey season. And a jar of homemade honey makes a lovely holiday gift.', 'w.stamp': 'WARM HONEY FOR COLD DAYS · ČEPOVAN ·', 'w.gift.title': 'Honey for holiday gifts', 'w.gift.text': 'A jar of homemade honey is a gift everyone uses. Call us and we’ll help you choose varieties and sizes for your gifts.', 'w.gift.cta': 'Call us',
       'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
       'hero.eyebrow': 'Family beekeepers · Čepovan',
       'hero.title': 'Honey from<br>the <em>Čepovan</em><br>Valley',
@@ -825,7 +824,7 @@
     de: {
       'brand': 'Imkerei Urbanc',
       'role.head': 'Imkermeister', 'role.beekeeper': 'Imker', 'role.helper': 'Imkergehilfe', 'nav.contact': 'Kontakt', 'contact.title': 'Rufen Sie uns an oder schreiben Sie uns', 'contact.lead': 'Für Bestellungen und Fragen erreichen Sie uns telefonisch oder per WhatsApp.', 'contact.call': 'Anrufen',
-      'lb.close': 'Schließen', 'lb.prev': 'Vorheriges Foto', 'lb.next': 'Nächstes Foto', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warmer Honig<br>für <em>kalte</em><br>Tage', 'w.lead': 'Ein Löffel Honig im Tee, ein Glas heiße Milch mit Honig vor dem Schlafen … Der Winter ist Honigzeit. Und ein Glas hausgemachter Honig ist ein schönes Festtagsgeschenk.', 'w.stamp': 'WARMER HONIG FÜR KALTE TAGE · ČEPOVAN ·', 'w.gift.title': 'Honig als Festtagsgeschenk', 'w.gift.text': 'Ein Glas hausgemachter Honig ist ein Geschenk, das jeder verwendet. Rufen Sie uns an – wir helfen Ihnen, Sorten und Größen auszuwählen.', 'w.gift.cta': 'Rufen Sie uns an',
+      'lb.close': 'Schließen', 'lb.prev': 'Vorheriges Foto', 'lb.next': 'Nächstes Foto', 'w.hero.alt': 'Unser Bienenhaus im Winter', 'w.eyebrow': 'Winter in Čepovan', 'w.title': 'Warmer Honig<br>für <em>kalte</em><br>Tage', 'w.lead': 'Ein Löffel Honig im Tee, ein Glas heiße Milch mit Honig vor dem Schlafen … Der Winter ist Honigzeit. Und ein Glas hausgemachter Honig ist ein schönes Festtagsgeschenk.', 'w.stamp': 'WARMER HONIG FÜR KALTE TAGE · ČEPOVAN ·', 'w.gift.title': 'Honig als Festtagsgeschenk', 'w.gift.text': 'Ein Glas hausgemachter Honig ist ein Geschenk, das jeder verwendet. Rufen Sie uns an – wir helfen Ihnen, Sorten und Größen auszuwählen.', 'w.gift.cta': 'Rufen Sie uns an',
       'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
       'hero.eyebrow': 'Familienimkerei · Čepovan',
       'hero.title': 'Honig<br>aus dem<br><em>Čepovan</em>-Tal',
@@ -877,7 +876,7 @@
     it: {
       'brand': 'Apicoltura Urbanc',
       'role.head': 'Apicoltore capo', 'role.beekeeper': 'Apicoltore', 'role.helper': 'Aiuto apicoltore', 'nav.contact': 'Contatti', 'contact.title': 'Chiamateci o scriveteci', 'contact.lead': 'Per ordini e domande siamo raggiungibili per telefono e su WhatsApp.', 'contact.call': 'Chiama',
-      'lb.close': 'Chiudi', 'lb.prev': 'Foto precedente', 'lb.next': 'Foto successiva', 'w.eyebrow': 'Inverno a Čepovan', 'w.title': 'Miele caldo<br>per giornate<br><em>fredde</em>', 'w.lead': 'Un cucchiaino di miele nel tè, un bicchiere di latte caldo con miele prima di dormire … L’inverno è la stagione del miele. E un vasetto di miele fatto in casa è un bel regalo per le feste.', 'w.stamp': 'MIELE CALDO PER GIORNATE FREDDE · ČEPOVAN ·', 'w.gift.title': 'Miele per i regali di festa', 'w.gift.text': 'Un vasetto di miele fatto in casa è un regalo che tutti usano. Chiamateci e vi aiuteremo a scegliere varietà e formati per i vostri regali.', 'w.gift.cta': 'Chiamateci',
+      'lb.close': 'Chiudi', 'lb.prev': 'Foto precedente', 'lb.next': 'Foto successiva', 'w.hero.alt': 'Il nostro apiario d’inverno', 'w.eyebrow': 'Inverno a Čepovan', 'w.title': 'Miele caldo<br>per giornate<br><em>fredde</em>', 'w.lead': 'Un cucchiaino di miele nel tè, un bicchiere di latte caldo con miele prima di dormire … L’inverno è la stagione del miele. E un vasetto di miele fatto in casa è un bel regalo per le feste.', 'w.stamp': 'MIELE CALDO PER GIORNATE FREDDE · ČEPOVAN ·', 'w.gift.title': 'Miele per i regali di festa', 'w.gift.text': 'Un vasetto di miele fatto in casa è un regalo che tutti usano. Chiamateci e vi aiuteremo a scegliere varietà e formati per i vostri regali.', 'w.gift.cta': 'Chiamateci',
       'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
       'hero.eyebrow': 'Apicoltura di famiglia · Čepovan',
       'hero.title': 'Miele<br>della valle<br>di <em>Čepovan</em>',
