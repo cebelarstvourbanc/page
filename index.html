@@ -3,755 +3,735 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Čebelarstvo Urbanc</title>
+  <title>Čebelarstvo Urbanc — med iz Čepovanske doline</title>
+  <meta name="description" content="Družinsko čebelarstvo iz Čepovana. Ročno točen lipov, cvetlični, akacijev in gozdni med, brez dodatkov." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Karla:wght@400;500;700&display=swap">
   <!-- hCaptcha -->
   <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     :root {
-      --amber-light: #FAEEDA;
-      --amber-mid:   #FAC775;
-      --amber:       #EF9F27;
-      --amber-dark:  #633806;
-      --amber-deep:  #412402;
-      --green-light: #EAF3DE;
-      --green:       #3B6D11;
-      --green-dark:  #27500A;
-      --red-light:   #FCEBEB;
-      --red:         #A32D2D;
-      --text:        #2C2C2A;
-      --text-muted:  #5F5E5A;
-      --bg:          #FFFDF8;
-      --surface:     #FFFFFF;
-      --border:      rgba(0,0,0,0.1);
-      --radius:      12px;
+      --paper:      #FBF5EA;
+      --paper-2:    #F3E7D1;
+      --line:       #E6D6BC;
+      --line-2:     #D9C4A3;
+      --tan:        #C9AE85;
+      --ink:        #2B1D0E;
+      --ink-2:      #4E3A22;
+      --muted:      #6A5A44;
+      --honey:      #E39B1B;
+      --honey-deep: #C47A0C;
+      --honey-text: #8A5A12;
+      --honey-pale: #F2CF6B;
+      --green:      #3F5A2E;
+      --green-dot:  #4F7A35;
+      --red:        #9A2E1E;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'Karla', system-ui, -apple-system, sans-serif;
     }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--paper);
     }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: #6B3A0A; }
+    a:hover { color: var(--ink); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+    p { margin: 0; }
 
-    /* NAV */
-    nav {
-      background: var(--amber-deep);
-      color: var(--amber-light);
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
+    .container { max-width: 1160px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--honey-text);
     }
-    .nav-brand { display: flex; align-items: center; gap: 0.75rem; font-size: 18px; font-weight: 500; }
-    .nav-brand span { font-size: 24px; }
+    .section-h2 { font-size: clamp(34px, 5vw, 48px); line-height: 1.05; }
 
-    /* LANGUAGE SWITCHER — flag emoji buttons */
-    .lang-switcher { display: flex; gap: 6px; }
+    /* ---------- NAV ---------- */
+    .nav { padding: 18px 24px; border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; top: 0; z-index: 10; }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .brand span { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; }
+    .nav-right { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { text-decoration: none; font-weight: 500; color: var(--ink); }
+    .nav-links a:hover { color: var(--honey-deep); }
+    .lang-switcher { display: flex; gap: 2px; border: 1px solid var(--line-2); border-radius: 999px; padding: 3px; }
     .lang-btn {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      opacity: 0.65;
+      font: inherit; font-size: 13px; font-weight: 700;
+      min-width: 44px; min-height: 36px;
+      border: none; border-radius: 999px;
+      background: transparent; color: var(--ink); cursor: pointer;
+      transition: background .15s, color .15s;
     }
-    .lang-btn:hover { background: rgba(255,255,255,0.22); opacity: 0.9; }
-    .lang-btn.active { background: rgba(255,255,255,0.25); opacity: 1; outline: 2px solid var(--amber-mid); outline-offset: 1px; }
+    .lang-btn:hover { background: var(--paper-2); }
+    .lang-btn.active { background: var(--ink); color: var(--paper); }
 
-    /* HERO — no title, just tagline */
-    .hero {
-      background: var(--amber-mid);
-      color: var(--amber-deep);
-      text-align: center;
-      padding: 4rem 1.5rem 3rem;
-      position: relative;
-      overflow: hidden;
+    /* ---------- HERO ---------- */
+    .hero { padding: 64px 24px 80px; position: relative; overflow: hidden; }
+    .hero-comb { position: absolute; right: -60px; top: -40px; opacity: 0.35; pointer-events: none; }
+    .hero .container { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; position: relative; }
+    .hero-text { flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+    .hero h1 { font-size: clamp(44px, 7vw, 72px); line-height: 1.02; }
+    .hero h1 em { font-weight: 400; color: var(--honey-deep); }
+    .hero-lead { font-size: 19px; max-width: 470px; color: var(--ink-2); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 52px; padding: 0 28px;
+      border-radius: 999px; border: none;
+      font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+      transition: background .15s, transform .15s;
     }
-    .hero h1 { font-size: clamp(24px, 5vw, 38px); font-weight: 600; margin-bottom: 0.5rem; }
-    .hero p  { font-size: 17px; color: var(--amber-dark); max-width: 500px; margin: 0 auto; }
+    .btn-dark { background: var(--ink); color: var(--paper); }
+    .btn-dark:hover { background: #4a3218; color: var(--paper); }
+    .btn-honey { background: var(--honey-pale); color: var(--ink); }
+    .btn-honey:hover { background: #f7dc8e; color: var(--ink); }
+    .btn-link { padding: 0 12px; color: #6B3A0A; text-decoration: underline; text-underline-offset: 4px; }
+    .hero-media { flex: 1 1 440px; min-width: 0; position: relative; padding: 0 20px 20px 0; }
+    .hero-media img { width: 100%; aspect-ratio: 5/6; object-fit: cover; border-radius: 280px 280px 24px 24px; }
+    .hero-stamp { position: absolute; left: -30px; bottom: 40px; }
+    .hero-bee { position: absolute; right: -10px; top: 20px; }
 
-    .wrap { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem; }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--amber-deep);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--amber-mid);
-    }
-
-    /* ABOUT */
-    .about-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--amber);
-      border-radius: var(--radius);
-      padding: 1.5rem 1.75rem;
-      margin-bottom: 3rem;
-      font-size: 15px;
-      color: var(--text);
-      line-height: 1.8;
-    }
-    .about-box p + p { margin-top: 0.75rem; }
-
-    /* HONEY CARDS */
-    .honey-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 16px;
-      margin-bottom: 3rem;
-    }
+    /* ---------- HONEYS ---------- */
+    .honeys { background: var(--paper-2); padding: 80px 24px; }
+    .honeys-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .honeys-head p { max-width: 380px; color: var(--ink-2); }
+    .honey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
     .honey-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      position: relative;
-      border: 2px solid transparent;
+      background: var(--paper); border-radius: 20px; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .15s, box-shadow .15s;
     }
-    .honey-card.available {
-      border-color: var(--green);
-	  background-color: rgba(0, 255, 0, 0.1);
-      transition: transform 0.15s, box-shadow 0.15s;
+    .honey-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(43,29,14,.08); }
+    .honey-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .honey-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .honey-card h3 { font-size: 26px; }
+    .honey-card .desc { color: var(--ink-2); font-size: 15px; }
+    .honey-meta {
+      margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px;
     }
-    .honey-card.available:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .honey-card.available .badge {
-      background: var(--green-light);
-      color: var(--green);
-      border: 1px solid var(--green);
-    }
-    .honey-card.unavailable { 
-	  border-color: var(--red);
-	  background-color: var(--red-light); 
-	}
+    .status { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--green); }
+    .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--green-dot); }
+    .price { font-weight: 700; }
+    .honey-card.soldout { background: transparent; border: 1.5px dashed var(--tan); }
+    .honey-card.soldout:hover { transform: none; box-shadow: none; }
+    .honey-card.soldout img { opacity: 0.6; }
+    .honey-card.soldout h3, .honey-card.soldout .desc { color: var(--muted); }
+    .honey-card.soldout .status { color: var(--red); }
+    .honey-card.soldout .status::before { background: transparent; border: 2px solid var(--red); }
+    .honey-card.soldout .price { font-weight: 500; color: var(--muted); }
 
-	.honey-card.unavailable .badge {
-	  background: var(--red-light);
-	  color: var(--red);
-	  border: 1px solid var(--red);
-	}
-    .honey-card .icon { font-size: 36px; display: block; margin-bottom: 0.75rem; }
-    .honey-card h3 { font-size: 16px; font-weight: 600; color: var(--amber-deep); margin-bottom: 6px; }
-    .honey-card p.desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 3px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-    }
+    /* ---------- STORY ---------- */
+    .story { padding: 88px 24px; }
+    .story h2 { margin: 8px 0 48px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; }
+    .step { display: flex; flex-direction: column; gap: 12px; }
+    .step-num { font-family: var(--serif); font-size: 20px; color: var(--honey-deep); }
+    .step h3 { font-size: 24px; }
+    .step p { color: var(--ink-2); }
 
-    /* PHOTOS */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 3rem;
-    }
-    .photo-grid a {
-      display: block;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .photo-grid a:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    }
-    .photo-grid img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-    }
+    /* ---------- GALLERY ---------- */
+    .gallery { padding: 0 24px 88px; }
+    .gallery .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: end; }
+    .gallery figure { margin: 0; }
+    .gallery a { display: block; overflow: hidden; }
+    .gallery img { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform .3s; }
+    .gallery a:hover img { transform: scale(1.03); }
+    .gallery .arch { border-radius: 200px 200px 16px 16px; }
+    .gallery .rect { border-radius: 16px; }
+    .gallery figcaption { padding-top: 10px; font-family: var(--serif); font-style: italic; color: var(--muted); }
 
-    /* MAP TABS */
-    .map-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
+    /* ---------- FAQ ---------- */
+    .faq { background: var(--paper-2); padding: 88px 24px; }
+    .faq .container { display: flex; flex-wrap: wrap; gap: 48px; }
+    .faq-intro { flex: 1 1 300px; min-width: 0; }
+    .faq-intro h2 { margin: 8px 0 16px; }
+    .faq-intro p { color: var(--ink-2); }
+    .faq-list { flex: 2 1 520px; min-width: 0; border-bottom: 1px solid var(--line-2); }
+    .faq-list details { border-top: 1px solid var(--line-2); padding: 20px 0; }
+    .faq-list summary {
+      font-family: var(--serif); font-weight: 600; font-size: 22px;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: "+"; font-family: var(--sans); font-weight: 400; font-size: 28px; line-height: 1;
+      color: var(--honey-deep); transition: transform .2s; flex-shrink: 0;
+    }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-list details p { margin-top: 10px; color: var(--ink-2); max-width: 640px; }
+
+    /* ---------- VISIT + CONTACT ---------- */
+    .visit { background: var(--ink); color: var(--paper); padding: 88px 24px; }
+    .visit .container { display: flex; flex-wrap: wrap; gap: 56px; }
+    .visit-info { flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+    .visit .eyebrow { color: var(--honey-pale); }
+    .visit h2 { font-size: clamp(32px, 4.5vw, 44px); }
+    .visit-info > p { color: var(--line); }
+
+    .map-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
     .map-tab {
-      padding: 8px 18px;
-      border-radius: 8px 8px 0 0;
-      border: 1px solid var(--border);
-      border-bottom: none;
-      background: var(--amber-light);
-      color: var(--amber-dark);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
+      font: inherit; font-size: 14px; font-weight: 700;
+      min-height: 40px; padding: 0 16px;
+      border: 1px solid #5A4630; border-radius: 999px;
+      background: transparent; color: var(--line); cursor: pointer;
     }
-    .map-tab.active { background: var(--surface); color: var(--amber-deep); }
-    .map-wrapper {
-      border-radius: 0 var(--radius) var(--radius) var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      margin-bottom: 3rem;
-    }
-    .map-panel { display: none; }
+    .map-tab:hover { border-color: var(--honey-pale); }
+    .map-tab.active { background: var(--honey-pale); color: var(--ink); border-color: var(--honey-pale); }
+    .map-panel { display: none; border-radius: 16px; overflow: hidden; background: var(--paper); color: var(--ink); }
     .map-panel.active { display: block; }
-    .map-wrapper iframe {
-      display: block;
-      width: 100%;
-      height: 340px;
-      border: none;
-    }
-    .map-footer {
-      background: var(--amber-light);
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .map-footer p { font-size: 14px; color: var(--amber-dark); }
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--amber-deep);
-      color: var(--amber-light);
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 15px;
-      font-weight: 500;
-      transition: background 0.15s;
-    }
-    .nav-btn:hover { background: var(--amber-dark); }
-
-    /* DIRECTIONS */
-    .directions-panel { padding: 1.5rem 1.5rem 0.5rem; background: var(--surface); }
-    .directions-panel h3 { font-size: 15px; font-weight: 600; color: var(--amber-deep); margin-bottom: 1rem; }
-    .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 1rem; }
-    .step-num {
-      min-width: 28px; height: 28px; border-radius: 50%;
-      background: var(--amber-mid); color: var(--amber-deep);
+    .map-panel iframe { display: block; width: 100%; height: 300px; border: 0; }
+    .map-caption { padding: 12px 16px; font-size: 14px; color: var(--ink-2); }
+    .directions { padding: 20px 20px 8px; }
+    .dir-step { display: flex; gap: 14px; margin-bottom: 14px; }
+    .dir-num {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--honey-pale); color: var(--ink);
       font-size: 13px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center; margin-top: 2px;
     }
-    .step p { font-size: 14px; color: var(--text); }
-    .step p em { color: var(--text-muted); font-style: normal; font-size: 13px; display: block; margin-top: 2px; }
-    .landmark-box {
-      background: var(--amber-light);
-      border-radius: 0 0 var(--radius) var(--radius);
-      padding: 1rem 1.5rem;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .landmark-box span { font-size: 24px; flex-shrink: 0; }
-    .landmark-box p { font-size: 13px; color: var(--amber-dark); }
+    .dir-step p { font-size: 15px; }
+    .dir-step small { display: block; color: var(--muted); font-size: 13px; }
+    .landmark { background: var(--paper-2); padding: 14px 20px; font-size: 14px; color: var(--ink-2); }
 
-    /* ADDRESS */
-    .contact-bar {
-      background: var(--green-light);
-      border: 1px solid rgba(59,109,17,0.25);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-      margin-bottom: 3rem;
+    .contact-form {
+      flex: 1 1 420px; min-width: 0;
+      background: var(--paper); color: var(--ink);
+      border-radius: 24px; padding: 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      align-self: flex-start;
     }
-    .contact-bar .contact-icon { font-size: 28px; }
-    .contact-bar p { font-size: 15px; color: var(--green-dark); }
-
-    /* CONTACT FORM */
-    .contact-form-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      margin-bottom: 3rem;
+    .contact-form h3 { font-size: 30px; }
+    .form-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .field { flex: 1 1 170px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; }
+    .field input, .field textarea, .field select {
+      font: inherit; font-weight: 400; font-size: 16px;
+      padding: 12px 14px; border: 1px solid var(--tan); border-radius: 12px;
+      background: #fff; color: var(--ink); outline: none;
     }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-    .form-group { display: flex; flex-direction: column; gap: 5px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      padding: 9px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
-      background: var(--bg);
-      color: var(--text);
-      transition: border-color 0.15s;
-      outline: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--amber); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .captcha-row { margin: 16px 0; }
-    .submit-btn {
-      background: var(--amber-deep);
-      color: var(--amber-light);
-      border: none;
-      border-radius: 8px;
-      padding: 11px 28px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .submit-btn:hover { background: var(--amber-dark); }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--honey); box-shadow: 0 0 0 3px rgba(227,155,27,.2); }
+    .field textarea { resize: vertical; min-height: 120px; }
     .form-success {
-      display: none;
-      background: var(--green-light);
-      border: 1px solid var(--green);
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      color: var(--green-dark);
-      font-size: 15px;
-      margin-top: 12px;
+      display: none; background: #EAF3DE; border: 1px solid var(--green);
+      border-radius: 12px; padding: 14px 16px; color: #27500A; font-size: 15px;
     }
 
-    footer {
-      background: var(--amber-deep);
-      color: var(--amber-light);
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 13px;
+    footer { padding: 28px 24px; text-align: center; font-size: 14px; color: var(--muted); }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { padding: 40px 20px 56px; }
+      .hero-stamp { width: 110px; height: 110px; left: -8px; bottom: 20px; }
+      .contact-form { padding: 24px; }
     }
-	
-	.badge {
-	  display: inline-block;
-	  margin-top: 10px;
-	  margin-bottom: 10px;
-	}
-	
-	.hero {
-	  background: url('cepovan.jpg');
-	  background-size: cover;
-	  background-position: center;
-	  background-repeat: no-repeat;
-	  min-height: 560px;
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  text-align: center;
-	  color: white;
-	  padding: 2rem 1.5rem;
-	}
-	
-	.hero-content {
-	  max-width: 600px;
-	  backdrop-filter: blur(2px);
-	}
-
-    @media (max-width: 540px) {
-      .map-tab { font-size: 12px; padding: 6px 10px; }
-      .map-footer { flex-direction: column; align-items: flex-start; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-
-    [data-lang] { display: none; }
-    [data-lang].lang-active { display: block; }
-    span[data-lang].lang-active { display: inline; }
-	
-	.step p {
-	  flex: 1;
-	  margin: 0;
-	  display: block;
-	}
-
-	.step p strong {
-	  display: inline;
-	}
-
-	.step p em {
-	  display: block;
-	  margin-top: 4px;
-	  color: var(--text-muted);
-	}
-
-.step {
-  align-items: flex-start;
-}
-
-.intro {
-  max-width: 860px;
-  margin: 2.5rem auto 1rem;
-  padding: 1.5rem 1.75rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--amber);
-  border-radius: var(--radius);
-}
-
-.intro h2 {
-  font-size: 20px;
-  margin-bottom: 0.75rem;
-  color: var(--amber-deep);
-}
-
-.intro p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text);
-}
-
-.intro p + p {
-  margin-top: 0.6rem;
-}
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-brand"><span>🐝</span> Čebelarstvo Urbanc</div>
-  <div class="lang-switcher">
-    <button class="lang-btn active" onclick="setLang('sl')" title="Slovenščina">🇸🇮</button>
-    <button class="lang-btn" onclick="setLang('en')" title="English">🇬🇧</button>
-    <button class="lang-btn" onclick="setLang('de')" title="Deutsch">🇩🇪</button>
-    <button class="lang-btn" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a class="brand" href="#">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 L35 11.5 V28.5 L20 37 L5 28.5 V11.5 Z" fill="none" stroke="#E39B1B" stroke-width="2"/><ellipse cx="20" cy="22" rx="7" ry="5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.5"/><path d="M18 17.5 V26.5 M22 17.5 V26.5" stroke="#2B1D0E" stroke-width="1.5"/><ellipse cx="16" cy="15" rx="4" ry="3" fill="none" stroke="#2B1D0E" stroke-width="1.5"/><ellipse cx="24" cy="15" rx="4" ry="3" fill="none" stroke="#2B1D0E" stroke-width="1.5"/></svg>
+      <span data-i18n="brand">Čebelarstvo Urbanc</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#medi" data-i18n="nav.honeys">Medi</a>
+        <a href="#zgodba" data-i18n="nav.story">Od panja do kozarca</a>
+        <a href="#vprasanja" data-i18n="nav.faq">Vprašanja</a>
+        <a href="#obisk" data-i18n="nav.visit">Obisk</a>
+      </div>
+      <div class="lang-switcher" role="group" aria-label="Jezik / Language">
+        <button class="lang-btn active" type="button" data-lang="sl" title="Slovenščina">SL</button>
+        <button class="lang-btn" type="button" data-lang="en" title="English">EN</button>
+        <button class="lang-btn" type="button" data-lang="de" title="Deutsch">DE</button>
+        <button class="lang-btn" type="button" data-lang="it" title="Italiano">IT</button>
+      </div>
+    </div>
   </div>
 </nav>
 
-<!-- HERO: samo tagline, brez naslova -->
+<!-- HERO -->
 <header class="hero">
-  <!-- <span class="bee">🐝</span> -->
-  <!-- <p data-lang="sl" class="lang-active">Svež, naraven med — naravnost iz panja do vaše mize</p> -->
-  <!-- <p data-lang="en">Fresh, natural honey — straight from the hive to your table</p> -->
-  <!-- <p data-lang="de">Frischer, natürlicher Honig — direkt vom Bienenstock auf Ihren Tisch</p> -->
-  <!-- <p data-lang="it">Miele fresco e naturale — direttamente dall'alveare alla vostra tavola</p> -->
+  <svg class="hero-comb" width="420" height="360" viewBox="0 0 420 360" aria-hidden="true"><g fill="none" stroke="#E39B1B" stroke-width="1.5"><path d="M60 20 L100 43 V89 L60 112 L20 89 V43 Z"/><path d="M140 20 L180 43 V89 L140 112 L100 89 V43 Z"/><path d="M220 20 L260 43 V89 L220 112 L180 89 V43 Z"/><path d="M100 89 L140 112 V158 L100 181 L60 158 V112 Z"/><path d="M180 89 L220 112 V158 L180 181 L140 158 V112 Z"/><path d="M260 89 L300 112 V158 L260 181 L220 158 V112 Z"/><path d="M140 158 L180 181 V227 L140 250 L100 227 V181 Z"/><path d="M220 158 L260 181 V227 L220 250 L180 227 V181 Z"/></g></svg>
+  <div class="container">
+    <div class="hero-text">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Družinsko čebelarstvo · Čepovan</span>
+      <h1 data-i18n="hero.title">Med iz <em>Čepovanske</em> doline</h1>
+      <p class="hero-lead" data-i18n="hero.lead">Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#medi" data-i18n="hero.cta">Izberite svoj med</a>
+        <a class="btn btn-link" href="#obisk"><span data-i18n="hero.cta2">Obiščite nas</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
+      <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="11" font-weight="700" letter-spacing="2.4" fill="#2B1D0E"><textPath href="#stampRing" data-i18n="hero.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
+      <svg class="hero-bee" width="220" height="90" viewBox="0 0 220 90" aria-hidden="true"><path d="M4 70 C40 20 80 90 120 50 S190 10 200 30" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-dasharray="4 6" stroke-linecap="round"/><g transform="translate(196 14)"><ellipse cx="10" cy="14" rx="9" ry="6.5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.6"/><path d="M7 8.5 V19.5 M12 8.5 V19.5" stroke="#2B1D0E" stroke-width="1.6"/><ellipse cx="6" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/><ellipse cx="14" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/></g></svg>
+    </div>
+  </div>
 </header>
 
-<main class="wrap">
-
-  <!-- O NAS -->
-<!-- Slovenščina -->
-<section class="intro" data-lang="sl">
-  <h2>🐝 Čebelarstvo Urbanc</h2>
-
-  <p>
-    Smo družinsko čebelarstvo iz Čepovana, kjer čebele nabirajo nektar v
-    neokrnjeni naravi Čepovanske doline.
-  </p>
-
-  <p>
-    Naš med je ročno pridelan v majhnih serijah, brez dodatkov — samo narava,
-    čebele in potrpežljivo delo.
-  </p>
-</section>
-
-
-<!-- German -->
-<section class="intro" data-lang="de">
-  <h2>🐝 Imkerei Urbanc</h2>
-
-  <p>
-    Wir sind eine Familienimkerei aus Čepovan, wo Bienen Nektar in der
-    unberührten Natur des Čepovanska-Tals sammeln.
-  </p>
-
-  <p>
-    Unser Honig wird in kleinen Chargen von Hand hergestellt, ohne Zusätze —
-    nur Natur, Bienen und geduldige Arbeit.
-  </p>
-</section>
-
-
-<!-- English -->
-<section class="intro" data-lang="en">
-  <h2>🐝 Urbanc Beekeeping</h2>
-
-  <p>
-    We are a family beekeeping farm from Čepovan, where bees collect nectar in
-    the untouched nature of the Čepovan Valley.
-  </p>
-
-  <p>
-    Our honey is handcrafted in small batches, with no additives — only nature,
-    bees, and patient work.
-  </p>
-</section>
-
-
-<!-- Italian -->
-<section class="intro" data-lang="it">
-  <h2>🐝 Apicoltura Urbanc</h2>
-
-  <p>
-    Siamo un’azienda familiare di apicoltura di Čepovan, dove le api raccolgono
-    nettare nella natura incontaminata della Valle di Čepovan.
-  </p>
-
-  <p>
-    Il nostro miele è prodotto a mano in piccoli lotti, senza additivi —
-    solo natura, api e lavoro paziente.
-  </p>
-</section>
-  
-   <!-- MEDU -->
-  <h2 class="section-title">
-    <span data-lang="sl" class="lang-active">🍯 Naši medovi</span>
-    <span data-lang="en">🍯 Our honeys</span>
-    <span data-lang="de">🍯 Unsere Honigsorten</span>
-    <span data-lang="it">🍯 I nostri mieli</span>
-  </h2>
-  <div class="honey-grid">
-    <div class="honey-card available">
-      <span class="icon">🌿</span>
-      <h3><span data-lang="sl" class="lang-active">Lipov med</span><span data-lang="en">Linden honey</span><span data-lang="de">Lindenhonig</span><span data-lang="it">Miele di tiglio</span></h3>
-	  <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>  
-	  <p class="desc"><span data-lang="sl" class="lang-active">Nežen in aromatičen z blagim cvetličnim okusom.</span><span data-lang="en">Delicate and aromatic with a mild floral taste.</span><span data-lang="de">Zart und aromatisch mit mildem Blütengeschmack.</span><span data-lang="it">Delicato e aromatico con un gusto floreale delicato.</span></p>
+<!-- MEDI -->
+<section class="honeys" id="medi">
+  <div class="container">
+    <div class="honeys-head">
+      <h2 class="section-h2" data-i18n="honeys.title">Naši medi</h2>
+      <p data-i18n="honeys.lead">Vsaka sorta ima svojo sezono. Ko kozarcev zmanjka, počakamo na naslednjo letino.</p>
     </div>
-    <div class="honey-card available">
-      <span class="icon">🌸</span>
-	  <h3><span data-lang="sl" class="lang-active">Cvetlični med</span><span data-lang="en">Wildflower honey</span><span data-lang="de">Blütenhonig</span><span data-lang="it">Miele di fiori</span></h3>
-      <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>   
-	  <p class="desc"><span data-lang="sl" class="lang-active">Uravnotežen okus poletnih travniških cvetlic.</span><span data-lang="en">Balanced taste of summer meadow flowers.</span><span data-lang="de">Ausgewogener Geschmack von Sommerwiesen.</span><span data-lang="it">Sapore equilibrato di fiori di prato estivo.</span></p>
-     </div>
-    <div class="honey-card available">
-      <span class="icon">🌼</span>
-      <h3><span data-lang="sl" class="lang-active">Akacijev med</span><span data-lang="en">Acacia honey</span><span data-lang="de">Akazienhonig</span><span data-lang="it">Miele di acacia</span></h3>
-	  <span class="badge"><span data-lang="sl" class="lang-active">✓ Na voljo</span><span data-lang="en">✓ Available</span><span data-lang="de">✓ Verfügbar</span><span data-lang="it">✓ Disponibile</span></span>   
-	  <p class="desc"><span data-lang="sl" class="lang-active">Svetel, tekoč in posebno sladek.</span><span data-lang="en">Light, liquid and exceptionally sweet.</span><span data-lang="de">Hell, flüssig und besonders süß.</span><span data-lang="it">Chiaro, liquido e particolarmente dolce.</span></p>
-    </div>
-    <div class="honey-card unavailable">
-      <span class="icon">🌲</span>
-	  <h3><span data-lang="sl" class="lang-active">Gozdni med</span><span data-lang="en">Forest honey</span><span data-lang="de">Waldhonig</span><span data-lang="it">Miele di bosco</span></h3>
-      <span class="badge"><span data-lang="sl" class="lang-active">✗ Ni na voljo.</span><span data-lang="en">✗ Unavailable.</span><span data-lang="de">✗ Nicht verfügbar.</span><span data-lang="it">✗ Non disponibile.</span></span>    
-	  <p class="desc"><span data-lang="sl" class="lang-active">Bogat in temnejši med z intenzivnim okusom.</span><span data-lang="en">Rich, darker honey with an intense earthy flavour.</span><span data-lang="de">Reicher, dunklerer Honig mit intensivem Aroma.</span><span data-lang="it">Miele ricco e scuro con sapore intenso e terroso.</span></p>
-    </div>
-  </div>
-
-  <!-- UTRINKI -->
-  <h2 class="section-title">
-    <span data-lang="sl" class="lang-active">📸 Utrinki iz čebelnjaka</span>
-    <span data-lang="en">📸 From our apiary</span>
-    <span data-lang="de">📸 Aus unserem Bienenhaus</span>
-    <span data-lang="it">📸 Dal nostro apiario</span>
-  </h2>
-  <div class="photo-grid">
-    <a href="cebele.jpeg" target="_blank" rel="noopener" title="Čebele / Bees">
-      <img src="cebele.jpeg" alt="Čebele" />
-    </a>
-    <a href="roj.jpg" target="_blank" rel="noopener" title="Roj / Swarm">
-      <img src="roj.jpg" alt="Roj čebel" />
-    </a>
-    <a href="cebelnjak.jpg" target="_blank" rel="noopener" title="Čebelnjak / Apiary">
-      <img src="cebelnjak.jpg" alt="Naš čebelnjak" />
-    </a>
-  </div>
-
-  <!-- LOKACIJA -->
-  <h2 class="section-title">
-    <span data-lang="sl" class="lang-active">📍 Kje nas najdete</span>
-    <span data-lang="en">📍 Find us</span>
-    <span data-lang="de">📍 So finden Sie uns</span>
-    <span data-lang="it">📍 Come trovarci</span>
-  </h2>
-  <div class="map-tabs">
-    <button class="map-tab active" onclick="showTab('gmaps', this)">🗺️ <span data-lang="sl" class="lang-active">Zemljevid</span><span data-lang="en">Map</span><span data-lang="de">Karte</span><span data-lang="it">Mappa</span></button>
-    <button class="map-tab" onclick="showTab('street', this)">📷 <span data-lang="sl" class="lang-active">Pogled z ulice</span><span data-lang="en">Street View</span><span data-lang="de">Straßenansicht</span><span data-lang="it">Vista strada</span></button>
-    <button class="map-tab" onclick="showTab('directions', this)">🧭 <span data-lang="sl" class="lang-active">Navodila</span><span data-lang="en">Directions</span><span data-lang="de">Wegbeschreibung</span><span data-lang="it">Indicazioni</span></button>
-  </div>
-  <div class="map-wrapper">
-    <div class="map-panel active" id="tab-gmaps">
-      <iframe src="https://www.google.com/maps?q=Čepovan+76,+5253+Čepovan,+Slovenija&output=embed"
-        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Lokacija čebelnjaka Urbanc"></iframe>
-      <div class="map-footer">
-        <p>📌 Čepovan 76, 5253 Čepovan, Slovenija</p>
-        <a class="nav-btn" href="https://www.google.com/maps/dir/?api=1&destination=Čepovan+76,+5253+Čepovan,+Slovenija" target="_blank" rel="noopener">🧭 <span data-lang="sl" class="lang-active">Odpri navigacijo</span><span data-lang="en">Open navigation</span><span data-lang="de">Navigation öffnen</span><span data-lang="it">Apri navigazione</span></a>
-      </div>
-    </div>
-    <div class="map-panel" id="tab-street">
-      <iframe src="https://www.google.com/maps/embed?pb=!4v1781856121836!6m8!1m7!1sTMZXfoCsIWZPT0rwe_FnNw!2m2!1d46.04890023051404!2d13.79271855705016!3f322.8436422878618!4f3.9208983372302555!5f0.7820865974627469"
-        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Street View čebelnjaka Urbanc" style="display:block;width:100%;height:340px;border:none;"></iframe>
-      <div class="map-footer">
-        <p>📷 <span data-lang="sl" class="lang-active">Pogled z ulice — tako izgleda naša hiša</span><span data-lang="en">Street View — this is what our house looks like</span><span data-lang="de">Straßenansicht — so sieht unser Haus aus</span><span data-lang="it">Vista strada — ecco come appare la nostra casa</span></p>
-      </div>
-    </div>
-    <div class="map-panel" id="tab-directions">
-      <div class="directions-panel">
-        <h3>🚗 <span data-lang="sl" class="lang-active">Kako do nas — iz smeri Nove Gorice</span><span data-lang="en">How to reach us — from Nova Gorica</span><span data-lang="de">Anfahrt — aus Richtung Nova Gorica</span><span data-lang="it">Come raggiungerci — da Nova Gorica</span></h3>
-        <div class="step">
-          <div class="step-num">1</div>
-          <p><span data-lang="sl" class="lang-active">Iz Nove Gorice vozite v smeri <strong>Ajdovščina / Col</strong>.<em>Sledite oznakam za Čepovan.</em></span><span data-lang="en">From Nova Gorica, drive towards <strong>Ajdovščina / Col</strong>.<em>Follow signs for Čepovan.</em></span><span data-lang="de">Von Nova Gorica Richtung <strong>Ajdovščina / Col</strong> fahren.<em>Schildern nach Čepovan folgen.</em></span><span data-lang="it">Da Nova Gorica, guidare verso <strong>Ajdovščina / Col</strong>.<em>Seguire le indicazioni per Čepovan.</em></span></p>
+    <div class="honey-grid">
+      <!-- Za razprodan med kartici dodajte razred "soldout" in zamenjajte status. -->
+      <article class="honey-card">
+        <img src="img/kozarec-lipov.svg" alt="Lipov med" data-i18n-alt="honey.linden" loading="lazy" width="400" height="500">
+        <div class="honey-body">
+          <h3 data-i18n="honey.linden">Lipov med</h3>
+          <p class="desc" data-i18n="honey.linden.desc">Nežen in aromatičen, z blagim cvetličnim okusom.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <p><span data-lang="sl" class="lang-active">Ko pridete v vas, poiščite <strong>hišno številko 76</strong>.<em>Hiša je na levi strani ceste.</em></span><span data-lang="en">Once in the village, look for <strong>house number 76</strong>.<em>The house is on the left side of the road.</em></span><span data-lang="de">Im Dorf die <strong>Hausnummer 76</strong> suchen.<em>Das Haus befindet sich auf der linken Seite.</em></span><span data-lang="it">Nel villaggio, cercare il <strong>numero civico 76</strong>.<em>La casa si trova sul lato sinistro della strada.</em></span></p>
+      </article>
+      <article class="honey-card">
+        <img src="img/kozarec-cvetlicni.svg" alt="Cvetlični med" data-i18n-alt="honey.flower" loading="lazy" width="400" height="500">
+        <div class="honey-body">
+          <h3 data-i18n="honey.flower">Cvetlični med</h3>
+          <p class="desc" data-i18n="honey.flower.desc">Uravnotežen okus poletnih travniških cvetlic.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
         </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <p><span data-lang="sl" class="lang-active">Prepoznate nas po <strong>rumeni čebelarski tabli</strong> pred hišo.<em>Parkiranje je možno ob cesti.</em></span><span data-lang="en">Look for the <strong>yellow beekeeping sign</strong> in front of the house.<em>Parking is available along the road.</em></span><span data-lang="de">Achten Sie auf das <strong>gelbe Imkerschild</strong> vor dem Haus.<em>Parkmöglichkeiten entlang der Straße.</em></span><span data-lang="it">Cercate il <strong>cartello giallo dell'apiario</strong> davanti alla casa.<em>Parcheggio disponibile lungo la strada.</em></span></p>
+      </article>
+      <article class="honey-card">
+        <img src="img/kozarec-akacijev.svg" alt="Akacijev med" data-i18n-alt="honey.acacia" loading="lazy" width="400" height="500">
+        <div class="honey-body">
+          <h3 data-i18n="honey.acacia">Akacijev med</h3>
+          <p class="desc" data-i18n="honey.acacia.desc">Svetel, tekoč in posebno sladek.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
         </div>
+      </article>
+      <article class="honey-card soldout">
+        <img src="img/kozarec-gozdni.svg" alt="Gozdni med" data-i18n-alt="honey.forest" loading="lazy" width="400" height="500">
+        <div class="honey-body">
+          <h3 data-i18n="honey.forest">Gozdni med</h3>
+          <p class="desc" data-i18n="honey.forest.desc">Bogat, temnejši med z intenzivnim okusom.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.soldout">Razprodano</span><span class="price" data-i18n="status.nextHarvest">Nova letina: [MESEC]</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- OD PANJA DO KOZARCA -->
+<section class="story" id="zgodba">
+  <div class="container">
+    <span class="eyebrow" data-i18n="story.eyebrow">Naša zgodba</span>
+    <h2 class="section-h2" data-i18n="story.title">Od panja do kozarca</h2>
+    <div class="steps">
+      <div class="step">
+        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#2B1D0E" stroke-width="1.8" stroke-linejoin="round"><path d="M12 18 H52 V54 H12 Z"/><path d="M8 18 L32 6 L56 18"/><path d="M12 30 H52 M12 42 H52"/><rect x="27" y="47" width="10" height="7" fill="#E39B1B"/></svg>
+        <span class="step-num">01</span>
+        <h3 data-i18n="story.1.title">Panji v naravi</h3>
+        <p data-i18n="story.1.text">Čebelnjak stoji sredi travnikov in gozdov Čepovanske doline, daleč od intenzivnega kmetijstva.</p>
       </div>
-      <div class="landmark-box">
-        <span>🏔️</span>
-        <p><span data-lang="sl" class="lang-active"><strong>Orientacijska točka:</strong> Čepovan leži v dolini Čepovanske grape. Tablica z imenom vasi vas bo opozorila, da ste na pravem mestu.</span><span data-lang="en"><strong>Landmark:</strong> Čepovan lies in the Čepovanska grapa valley. The village sign will confirm you're in the right place.</span><span data-lang="de"><strong>Orientierungspunkt:</strong> Čepovan liegt im Čepovanska-grapa-Tal. Das Ortsschild bestätigt, dass Sie am richtigen Ort sind.</span><span data-lang="it"><strong>Punto di riferimento:</strong> Čepovan si trova nella valle di Čepovanska grapa. Il cartello del villaggio confermerà che siete nel posto giusto.</span></p>
+      <div class="step">
+        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#2B1D0E" stroke-width="1.8" stroke-linejoin="round"><path d="M10 12 H54 V44 H10 Z"/><path d="M10 20 H54"/><path d="M32 44 V52"/><path d="M32 52 C26 52 26 60 32 60 C38 60 38 52 32 52 Z" fill="#E39B1B"/></svg>
+        <span class="step-num">02</span>
+        <h3 data-i18n="story.2.title">Ročno točenje</h3>
+        <p data-i18n="story.2.text">Satje odkrivamo in točimo sami. Med samo precedimo — ničesar ne dodajamo in ga ne segrevamo.</p>
+      </div>
+      <div class="step">
+        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#2B1D0E" stroke-width="1.8" stroke-linejoin="round"><rect x="22" y="6" width="20" height="8" rx="2"/><path d="M18 14 H46 Q52 14 52 20 V54 Q52 60 46 60 H18 Q12 60 12 54 V20 Q12 14 18 14 Z" fill="#F2CF6B"/><path d="M20 32 H44 V46 H20 Z" fill="#FBF5EA"/></svg>
+        <span class="step-num">03</span>
+        <h3 data-i18n="story.3.title">Naravnost k vam</h3>
+        <p data-i18n="story.3.text">Med prevzamete pri nas v Čepovanu ali se dogovorimo za dostavo.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- KONTAKTNI OBRAZEC -->
-  <h2 class="section-title">
-    <span data-lang="sl" class="lang-active">✉️ Pišite nam</span>
-    <span data-lang="en">✉️ Contact us</span>
-    <span data-lang="de">✉️ Schreiben Sie uns</span>
-    <span data-lang="it">✉️ Contattateci</span>
-  </h2>
-  <div class="contact-form-box">
+<!-- GALERIJA -->
+<section class="gallery" aria-label="Galerija">
+  <div class="container">
+    <figure>
+      <a href="img/cebele.jpg" target="_blank" rel="noopener"><img class="arch" src="img/cebele.jpg" alt="Čebele na panju" data-i18n-alt="gallery.1.alt" loading="lazy" width="1100" height="733"></a>
+      <figcaption data-i18n="gallery.1">Pridne čebele</figcaption>
+    </figure>
+    <figure>
+      <a href="img/roj.jpg" target="_blank" rel="noopener"><img class="rect" src="img/roj.jpg" alt="Roj čebel" data-i18n-alt="gallery.2.alt" loading="lazy" width="1100" height="1467"></a>
+      <figcaption data-i18n="gallery.2">Roj</figcaption>
+    </figure>
+    <figure>
+      <a href="img/cebelnjak.jpg" target="_blank" rel="noopener"><img class="arch" src="img/cebelnjak.jpg" alt="Naš čebelnjak" data-i18n-alt="gallery.3" loading="lazy" width="1100" height="1470"></a>
+      <figcaption data-i18n="gallery.3">Naš čebelnjak</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- VPRAŠANJA -->
+<section class="faq" id="vprasanja">
+  <div class="container">
+    <div class="faq-intro">
+      <span class="eyebrow" data-i18n="faq.eyebrow">Vprašanja</span>
+      <h2 class="section-h2" data-i18n="faq.title">Kar nas pogosto vprašate</h2>
+      <p data-i18n="faq.lead">Ne najdete odgovora? <a href="#obisk"><strong>Pišite nam.</strong></a></p>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary data-i18n="faq.1.q">Kako naročim med?</summary>
+        <p data-i18n="faq.1.a">Pišite nam prek obrazca spodaj ali pokličite na [TELEFON]. Dogovorimo se za prevzem v Čepovanu ali za dostavo.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.2.q">Ali med pošiljate po pošti?</summary>
+        <p data-i18n="faq.2.a">[ODGOVOR — npr. da, po vsej Sloveniji; poštnina [CENA] €, pri naročilu nad [ZNESEK] € brezplačno.]</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.3.q">Zakaj se je moj med strdil?</summary>
+        <p data-i18n="faq.3.a">Kristalizacija je naraven proces in znak pravega medu. Kozarec postavite v toplo vodno kopel (do 40 °C) in med bo spet tekoč.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.4.q">Kako dolgo med zdrži?</summary>
+        <p data-i18n="faq.4.a">Pravilno shranjen med — na suhem in temnem mestu, v zaprtem kozarcu — ostane užiten več let.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq.5.q">Ali lahko obiščem čebelnjak?</summary>
+        <p data-i18n="faq.5.a">Seveda, po predhodnem dogovoru. Pokažemo vam panje in pripravimo pokušino vseh sort.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- OBISK + KONTAKT -->
+<section class="visit" id="obisk">
+  <div class="container">
+    <div class="visit-info">
+      <span class="eyebrow" data-i18n="visit.eyebrow">Obisk čebelnjaka</span>
+      <h2 data-i18n="visit.title">Pridite pokusit k nam</h2>
+      <p>Čepovan 76, 5253 Čepovan, <span data-i18n="visit.country">Slovenija</span></p>
+
+      <div class="map-tabs" role="tablist">
+        <button class="map-tab active" type="button" role="tab" data-tab="gmaps" data-i18n="map.tab.map">Zemljevid</button>
+        <button class="map-tab" type="button" role="tab" data-tab="street" data-i18n="map.tab.street">Pogled z ulice</button>
+        <button class="map-tab" type="button" role="tab" data-tab="directions" data-i18n="map.tab.directions">Navodila</button>
+      </div>
+
+      <div class="map-panel active" id="tab-gmaps" role="tabpanel">
+        <iframe src="https://www.google.com/maps?q=Čepovan+76,+5253+Čepovan,+Slovenija&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Zemljevid — Čebelarstvo Urbanc"></iframe>
+      </div>
+      <div class="map-panel" id="tab-street" role="tabpanel">
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1781856121836!6m8!1m7!1sTMZXfoCsIWZPT0rwe_FnNw!2m2!1d46.04890023051404!2d13.79271855705016!3f322.8436422878618!4f3.9208983372302555!5f0.7820865974627469"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Street View — Čebelarstvo Urbanc"></iframe>
+        <p class="map-caption" data-i18n="map.street.caption">Pogled z ulice — tako izgleda naša hiša.</p>
+      </div>
+      <div class="map-panel" id="tab-directions" role="tabpanel">
+        <div class="directions">
+          <div class="dir-step"><span class="dir-num">1</span><p data-i18n="dir.1">Iz Nove Gorice vozite v smeri <strong>Ajdovščina / Col</strong>.<small>Sledite oznakam za Čepovan.</small></p></div>
+          <div class="dir-step"><span class="dir-num">2</span><p data-i18n="dir.2">V vasi poiščite <strong>hišno številko 76</strong>.<small>Hiša je na levi strani ceste.</small></p></div>
+          <div class="dir-step"><span class="dir-num">3</span><p data-i18n="dir.3">Prepoznate nas po <strong>rumeni čebelarski tabli</strong> pred hišo.<small>Parkiranje je možno ob cesti.</small></p></div>
+        </div>
+        <p class="landmark" data-i18n="dir.landmark"><strong>Orientacijska točka:</strong> Čepovan leži v Čepovanski grapi. Tabla z imenom vasi vam bo potrdila, da ste na pravem mestu.</p>
+      </div>
+
+      <a class="btn btn-honey" style="align-self: flex-start" href="https://www.google.com/maps/dir/?api=1&destination=Čepovan+76,+5253+Čepovan,+Slovenija" target="_blank" rel="noopener" data-i18n="map.navigate">Odpri navigacijo</a>
+    </div>
+
     <!--
-      NAVODILO: Ta obrazec pošilja sporočila prek Formspree (brezplačno do 50 sporočil/mesec).
+      NAVODILO: Obrazec pošilja sporočila prek Formspree (brezplačno do 50 sporočil/mesec).
       1. Registrirajte se na https://formspree.io
-      2. Ustvarite nov obrazec in kopirajte vašo endpoint URL
-      3. Zamenjajte action="https://formspree.io/f/VAŠA_ID" spodaj z vašo URL
-      Za captcho: v Formspree nastavitvah vklopite hCaptcha ALI pustite kot je —
-      hCaptcha widget je že vključen spodaj (testni ključ, zamenjajte z vašim s hcaptcha.com)
-   -->
-    <form id="contact-form" action="https://formspree.io/f/VAŠA_ID" method="POST">
+      2. Ustvarite nov obrazec in kopirajte endpoint URL
+      3. Zamenjajte action="https://formspree.io/f/VAŠA_ID" spodaj z vašim URL
+      hCaptcha: zamenjajte data-sitekey z vašim ključem iz https://dashboard.hcaptcha.com
+      (trenutni ključ je testni).
+    -->
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/VAŠA_ID" method="POST">
+      <h3 data-i18n="form.title">Naročilo ali vprašanje</h3>
       <div class="form-row">
-        <div class="form-group">
-          <label for="ime"><span data-lang="sl" class="lang-active">Ime</span><span data-lang="en">Name</span><span data-lang="de">Name</span><span data-lang="it">Nome</span></label>
-          <input type="text" id="ime" name="ime" required placeholder="Janez Novak" />
-        </div>
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required placeholder="janez@primer.si" />
-        </div>
-        <div class="form-group full">
-          <label for="zadeva"><span data-lang="sl" class="lang-active">Zadeva</span><span data-lang="en">Subject</span><span data-lang="de">Betreff</span><span data-lang="it">Oggetto</span></label>
-          <select id="zadeva" name="zadeva">
-            <option value="" disabled selected>—</option>
-            <option data-lang="sl" value="Naročilo medu">Naročilo medu</option>
-            <option data-lang="en" value="Honey order">Honey order</option>
-            <option data-lang="de" value="Honigbestellung">Honigbestellung</option>
-            <option data-lang="it" value="Ordine miele">Ordine miele</option>
-            <option data-lang="sl" value="Splošno vprašanje">Splošno vprašanje</option>
-            <option data-lang="en" value="General enquiry">General enquiry</option>
-            <option data-lang="de" value="Allgemeine Anfrage">Allgemeine Anfrage</option>
-            <option data-lang="it" value="Informazioni generali">Informazioni generali</option>
-            <option data-lang="sl" value="Obisk čebelnjaka">Obisk čebelnjaka</option>
-            <option data-lang="en" value="Visit the apiary">Visit the apiary</option>
-            <option data-lang="de" value="Besuch des Bienenstocks">Besuch des Bienenstocks</option>
-            <option data-lang="it" value="Visita all'apiario">Visita all'apiario</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label for="sporocilo"><span data-lang="sl" class="lang-active">Sporočilo</span><span data-lang="en">Message</span><span data-lang="de">Nachricht</span><span data-lang="it">Messaggio</span></label>
-          <textarea id="sporocilo" name="sporocilo" required></textarea>
-        </div>
+        <label class="field"><span data-i18n="form.name">Ime</span>
+          <input type="text" name="ime" required placeholder="Janez Novak" data-i18n-placeholder="form.name.ph"></label>
+        <label class="field"><span>E-mail</span>
+          <input type="email" name="email" required placeholder="janez@primer.si" data-i18n-placeholder="form.email.ph"></label>
       </div>
-
-      <!-- hCaptcha widget
-           Zamenjajte data-sitekey z vašim ključem iz https://dashboard.hcaptcha.com
-           Testni ključ "10000000-ffff-ffff-ffff-000000000001" deluje lokalno brez verifikacije.
-		-->
-      <div class="captcha-row">
-        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
-      </div>
-
-      <button type="submit" class="submit-btn">
-        <span data-lang="sl" class="lang-active">📨 Pošlji sporočilo</span>
-        <span data-lang="en">📨 Send message</span>
-        <span data-lang="de">📨 Nachricht senden</span>
-        <span data-lang="it">📨 Invia messaggio</span>
-      </button>
+      <label class="field"><span data-i18n="form.subject">Zadeva</span>
+        <select name="zadeva" required>
+          <option value="" disabled selected>—</option>
+          <option value="order" data-i18n="form.subject.order">Naročilo medu</option>
+          <option value="general" data-i18n="form.subject.general">Splošno vprašanje</option>
+          <option value="visit" data-i18n="form.subject.visit">Obisk čebelnjaka</option>
+        </select></label>
+      <label class="field"><span data-i18n="form.message">Sporočilo</span>
+        <textarea name="sporocilo" required placeholder="Rad bi naročil dva kozarca akacijevega medu …" data-i18n-placeholder="form.message.ph"></textarea></label>
+      <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+      <button class="btn btn-dark" type="submit" style="align-self: flex-start" data-i18n="form.send">Pošlji sporočilo</button>
+      <div class="form-success" id="form-success" data-i18n="form.success">Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.</div>
     </form>
-    <div class="form-success" id="form-success">
-      <span data-lang="sl" class="lang-active">✅ Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.</span>
-      <span data-lang="en">✅ Thank you! Your message has been sent. We'll get back to you shortly.</span>
-      <span data-lang="de">✅ Danke! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.</span>
-      <span data-lang="it">✅ Grazie! Il vostro messaggio è stato inviato. Vi risponderemo a breve.</span>
-    </div>
   </div>
-
-</main>
+</section>
 
 <footer>
-  🐝 Čebelarstvo Urbanc &copy; <span id="year"></span> —
-
-  <span data-lang="sl" class="lang-active">Naravni med iz Slovenije</span>
-  <span data-lang="en">Natural honey from Slovenia</span>
-  <span data-lang="de">Natürlicher Honig aus Slowenien</span>
-  <span data-lang="it">Miele naturale dalla Slovenia</span>
+  <span data-i18n="brand">Čebelarstvo Urbanc</span> &copy; <span id="year"></span> · <span data-i18n="footer">Naravni med iz Slovenije</span>
 </footer>
 
 <script>
-	
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const I18N = {
+    sl: {
+      'brand': 'Čebelarstvo Urbanc',
+      'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
+      'hero.eyebrow': 'Družinsko čebelarstvo · Čepovan',
+      'hero.title': 'Med iz <em>Čepovanske</em> doline',
+      'hero.lead': 'Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.',
+      'hero.cta': 'Izberite svoj med', 'hero.cta2': 'Obiščite nas',
+      'hero.alt': 'Čepovanska dolina',
+      'hero.stamp': 'ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·',
+      'honeys.title': 'Naši medi',
+      'honeys.lead': 'Vsaka sorta ima svojo sezono. Ko kozarcev zmanjka, počakamo na naslednjo letino.',
+      'honey.linden': 'Lipov med', 'honey.linden.desc': 'Nežen in aromatičen, z blagim cvetličnim okusom.',
+      'honey.flower': 'Cvetlični med', 'honey.flower.desc': 'Uravnotežen okus poletnih travniških cvetlic.',
+      'honey.acacia': 'Akacijev med', 'honey.acacia.desc': 'Svetel, tekoč in posebno sladek.',
+      'honey.forest': 'Gozdni med', 'honey.forest.desc': 'Bogat, temnejši med z intenzivnim okusom.',
+      'status.available': 'Na voljo', 'status.soldout': 'Razprodano', 'status.nextHarvest': 'Nova letina: [MESEC]',
+      'story.eyebrow': 'Naša zgodba', 'story.title': 'Od panja do kozarca',
+      'story.1.title': 'Panji v naravi', 'story.1.text': 'Čebelnjak stoji sredi travnikov in gozdov Čepovanske doline, daleč od intenzivnega kmetijstva.',
+      'story.2.title': 'Ročno točenje', 'story.2.text': 'Satje odkrivamo in točimo sami. Med samo precedimo — ničesar ne dodajamo in ga ne segrevamo.',
+      'story.3.title': 'Naravnost k vam', 'story.3.text': 'Med prevzamete pri nas v Čepovanu ali se dogovorimo za dostavo.',
+      'gallery.1': 'Pridne čebele', 'gallery.1.alt': 'Čebele na panju',
+      'gallery.2': 'Roj', 'gallery.2.alt': 'Roj čebel',
+      'gallery.3': 'Naš čebelnjak',
+      'faq.eyebrow': 'Vprašanja', 'faq.title': 'Kar nas pogosto vprašate',
+      'faq.lead': 'Ne najdete odgovora? <a href="#obisk"><strong>Pišite nam.</strong></a>',
+      'faq.1.q': 'Kako naročim med?', 'faq.1.a': 'Pišite nam prek obrazca spodaj ali pokličite na [TELEFON]. Dogovorimo se za prevzem v Čepovanu ali za dostavo.',
+      'faq.2.q': 'Ali med pošiljate po pošti?', 'faq.2.a': '[ODGOVOR — npr. da, po vsej Sloveniji; poštnina [CENA] €, pri naročilu nad [ZNESEK] € brezplačno.]',
+      'faq.3.q': 'Zakaj se je moj med strdil?', 'faq.3.a': 'Kristalizacija je naraven proces in znak pravega medu. Kozarec postavite v toplo vodno kopel (do 40 °C) in med bo spet tekoč.',
+      'faq.4.q': 'Kako dolgo med zdrži?', 'faq.4.a': 'Pravilno shranjen med — na suhem in temnem mestu, v zaprtem kozarcu — ostane užiten več let.',
+      'faq.5.q': 'Ali lahko obiščem čebelnjak?', 'faq.5.a': 'Seveda, po predhodnem dogovoru. Pokažemo vam panje in pripravimo pokušino vseh sort.',
+      'visit.eyebrow': 'Obisk čebelnjaka', 'visit.title': 'Pridite pokusit k nam', 'visit.country': 'Slovenija',
+      'map.tab.map': 'Zemljevid', 'map.tab.street': 'Pogled z ulice', 'map.tab.directions': 'Navodila',
+      'map.street.caption': 'Pogled z ulice — tako izgleda naša hiša.',
+      'map.navigate': 'Odpri navigacijo',
+      'dir.1': 'Iz Nove Gorice vozite v smeri <strong>Ajdovščina / Col</strong>.<small>Sledite oznakam za Čepovan.</small>',
+      'dir.2': 'V vasi poiščite <strong>hišno številko 76</strong>.<small>Hiša je na levi strani ceste.</small>',
+      'dir.3': 'Prepoznate nas po <strong>rumeni čebelarski tabli</strong> pred hišo.<small>Parkiranje je možno ob cesti.</small>',
+      'dir.landmark': '<strong>Orientacijska točka:</strong> Čepovan leži v Čepovanski grapi. Tabla z imenom vasi vam bo potrdila, da ste na pravem mestu.',
+      'form.title': 'Naročilo ali vprašanje',
+      'form.name': 'Ime', 'form.name.ph': 'Janez Novak', 'form.email.ph': 'janez@primer.si',
+      'form.subject': 'Zadeva', 'form.subject.order': 'Naročilo medu', 'form.subject.general': 'Splošno vprašanje', 'form.subject.visit': 'Obisk čebelnjaka',
+      'form.message': 'Sporočilo', 'form.message.ph': 'Rad bi naročil dva kozarca akacijevega medu …',
+      'form.send': 'Pošlji sporočilo',
+      'form.success': 'Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.',
+      'form.error': 'Napaka pri pošiljanju. Prosimo, poskusite znova.',
+      'form.offline': 'Napaka pri pošiljanju. Prosimo, preverite internetno povezavo.',
+      'footer': 'Naravni med iz Slovenije',
+      'title': 'Čebelarstvo Urbanc — med iz Čepovanske doline'
+    },
+    en: {
+      'brand': 'Urbanc Beekeeping',
+      'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
+      'hero.eyebrow': 'Family beekeepers · Čepovan',
+      'hero.title': 'Honey from the <em>Čepovan</em> Valley',
+      'hero.lead': 'Our bees gather nectar in the unspoilt nature of the Čepovan Valley. We extract our honey by hand, in small batches, with nothing added.',
+      'hero.cta': 'Choose your honey', 'hero.cta2': 'Visit us',
+      'hero.alt': 'The Čepovan Valley',
+      'hero.stamp': 'HAND-EXTRACTED · NOTHING ADDED · ČEPOVAN ·',
+      'honeys.title': 'Our honey',
+      'honeys.lead': 'Every variety has its season. When the jars run out, we wait for the next harvest.',
+      'honey.linden': 'Linden honey', 'honey.linden.desc': 'Delicate and aromatic, with a mild floral taste.',
+      'honey.flower': 'Wildflower honey', 'honey.flower.desc': 'The balanced taste of summer meadow flowers.',
+      'honey.acacia': 'Acacia honey', 'honey.acacia.desc': 'Light, runny and especially sweet.',
+      'honey.forest': 'Forest honey', 'honey.forest.desc': 'Rich, darker honey with an intense flavour.',
+      'status.available': 'Available', 'status.soldout': 'Sold out', 'status.nextHarvest': 'Next harvest: [MONTH]',
+      'story.eyebrow': 'Our story', 'story.title': 'From hive to jar',
+      'story.1.title': 'Hives in nature', 'story.1.text': 'Our apiary stands among the meadows and forests of the Čepovan Valley, far from intensive farming.',
+      'story.2.title': 'Extracted by hand', 'story.2.text': 'We uncap and extract the combs ourselves. The honey is only strained — nothing is added and it is never heated.',
+      'story.3.title': 'Straight to you', 'story.3.text': 'Pick up your honey from us in Čepovan, or we can arrange delivery.',
+      'gallery.1': 'Busy bees', 'gallery.1.alt': 'Bees on the hive',
+      'gallery.2': 'A swarm', 'gallery.2.alt': 'A swarm of bees',
+      'gallery.3': 'Our apiary',
+      'faq.eyebrow': 'Questions', 'faq.title': 'Frequently asked questions',
+      'faq.lead': 'Can’t find an answer? <a href="#obisk"><strong>Write to us.</strong></a>',
+      'faq.1.q': 'How do I order honey?', 'faq.1.a': 'Write to us using the form below or call [PHONE]. We’ll arrange pickup in Čepovan or delivery.',
+      'faq.2.q': 'Do you ship honey by post?', 'faq.2.a': '[ANSWER — e.g. yes, across Slovenia; shipping [PRICE] €, free for orders over [AMOUNT] €.]',
+      'faq.3.q': 'Why has my honey crystallised?', 'faq.3.a': 'Crystallisation is a natural process and a sign of real honey. Place the jar in a warm water bath (up to 40 °C) and it will turn runny again.',
+      'faq.4.q': 'How long does honey keep?', 'faq.4.a': 'Stored properly — in a dry, dark place in a closed jar — honey stays good for years.',
+      'faq.5.q': 'Can I visit the apiary?', 'faq.5.a': 'Of course, by appointment. We’ll show you the hives and offer a tasting of every variety.',
+      'visit.eyebrow': 'Visit the apiary', 'visit.title': 'Come and taste our honey', 'visit.country': 'Slovenia',
+      'map.tab.map': 'Map', 'map.tab.street': 'Street View', 'map.tab.directions': 'Directions',
+      'map.street.caption': 'Street View — this is what our house looks like.',
+      'map.navigate': 'Open navigation',
+      'dir.1': 'From Nova Gorica, drive towards <strong>Ajdovščina / Col</strong>.<small>Follow the signs for Čepovan.</small>',
+      'dir.2': 'In the village, look for <strong>house number 76</strong>.<small>The house is on the left side of the road.</small>',
+      'dir.3': 'Look for the <strong>yellow beekeeping sign</strong> in front of the house.<small>You can park along the road.</small>',
+      'dir.landmark': '<strong>Landmark:</strong> Čepovan lies in the Čepovanska grapa valley. The village sign will confirm you’re in the right place.',
+      'form.title': 'Order or question',
+      'form.name': 'Name', 'form.name.ph': 'John Smith', 'form.email.ph': 'john@example.com',
+      'form.subject': 'Subject', 'form.subject.order': 'Honey order', 'form.subject.general': 'General enquiry', 'form.subject.visit': 'Visiting the apiary',
+      'form.message': 'Message', 'form.message.ph': 'I’d like to order two jars of acacia honey …',
+      'form.send': 'Send message',
+      'form.success': 'Thank you! Your message has been sent. We’ll get back to you shortly.',
+      'form.error': 'Sending failed. Please try again.',
+      'form.offline': 'Sending failed. Please check your internet connection.',
+      'footer': 'Natural honey from Slovenia',
+      'title': 'Urbanc Beekeeping — honey from the Čepovan Valley'
+    },
+    de: {
+      'brand': 'Imkerei Urbanc',
+      'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
+      'hero.eyebrow': 'Familienimkerei · Čepovan',
+      'hero.title': 'Honig aus dem <em>Čepovan</em>-Tal',
+      'hero.lead': 'Unsere Bienen sammeln Nektar in der unberührten Natur des Čepovan-Tals. Wir schleudern unseren Honig von Hand, in kleinen Mengen und ohne Zusätze.',
+      'hero.cta': 'Wählen Sie Ihren Honig', 'hero.cta2': 'Besuchen Sie uns',
+      'hero.alt': 'Das Čepovan-Tal',
+      'hero.stamp': 'HANDGESCHLEUDERT · OHNE ZUSÄTZE · ČEPOVAN ·',
+      'honeys.title': 'Unsere Honigsorten',
+      'honeys.lead': 'Jede Sorte hat ihre Saison. Sind die Gläser leer, warten wir auf die nächste Ernte.',
+      'honey.linden': 'Lindenhonig', 'honey.linden.desc': 'Zart und aromatisch, mit mildem Blütengeschmack.',
+      'honey.flower': 'Blütenhonig', 'honey.flower.desc': 'Der ausgewogene Geschmack sommerlicher Wiesenblumen.',
+      'honey.acacia': 'Akazienhonig', 'honey.acacia.desc': 'Hell, flüssig und besonders süß.',
+      'honey.forest': 'Waldhonig', 'honey.forest.desc': 'Kräftiger, dunklerer Honig mit intensivem Aroma.',
+      'status.available': 'Verfügbar', 'status.soldout': 'Ausverkauft', 'status.nextHarvest': 'Neue Ernte: [MONAT]',
+      'story.eyebrow': 'Unsere Geschichte', 'story.title': 'Vom Bienenstock ins Glas',
+      'story.1.title': 'Bienenstöcke in der Natur', 'story.1.text': 'Unser Bienenhaus steht inmitten der Wiesen und Wälder des Čepovan-Tals, fern von intensiver Landwirtschaft.',
+      'story.2.title': 'Von Hand geschleudert', 'story.2.text': 'Wir entdeckeln und schleudern die Waben selbst. Der Honig wird nur gesiebt — nichts wird hinzugefügt, und er wird nie erhitzt.',
+      'story.3.title': 'Direkt zu Ihnen', 'story.3.text': 'Holen Sie Ihren Honig bei uns in Čepovan ab, oder wir vereinbaren eine Lieferung.',
+      'gallery.1': 'Fleißige Bienen', 'gallery.1.alt': 'Bienen am Bienenstock',
+      'gallery.2': 'Ein Schwarm', 'gallery.2.alt': 'Ein Bienenschwarm',
+      'gallery.3': 'Unser Bienenhaus',
+      'faq.eyebrow': 'Fragen', 'faq.title': 'Häufig gestellte Fragen',
+      'faq.lead': 'Keine Antwort gefunden? <a href="#obisk"><strong>Schreiben Sie uns.</strong></a>',
+      'faq.1.q': 'Wie bestelle ich Honig?', 'faq.1.a': 'Schreiben Sie uns über das Formular unten oder rufen Sie uns an: [TELEFON]. Wir vereinbaren die Abholung in Čepovan oder eine Lieferung.',
+      'faq.2.q': 'Versenden Sie Honig per Post?', 'faq.2.a': '[ANTWORT — z. B. ja, in ganz Slowenien; Versand [PREIS] €, ab [BETRAG] € kostenlos.]',
+      'faq.3.q': 'Warum ist mein Honig fest geworden?', 'faq.3.a': 'Kristallisation ist ein natürlicher Vorgang und ein Zeichen für echten Honig. Stellen Sie das Glas in ein warmes Wasserbad (bis 40 °C), dann wird er wieder flüssig.',
+      'faq.4.q': 'Wie lange ist Honig haltbar?', 'faq.4.a': 'Richtig gelagert — trocken, dunkel und im verschlossenen Glas — bleibt Honig jahrelang genießbar.',
+      'faq.5.q': 'Kann ich das Bienenhaus besuchen?', 'faq.5.a': 'Gerne, nach vorheriger Vereinbarung. Wir zeigen Ihnen die Bienenstöcke und bieten eine Verkostung aller Sorten an.',
+      'visit.eyebrow': 'Besuch im Bienenhaus', 'visit.title': 'Kommen Sie zur Verkostung', 'visit.country': 'Slowenien',
+      'map.tab.map': 'Karte', 'map.tab.street': 'Straßenansicht', 'map.tab.directions': 'Wegbeschreibung',
+      'map.street.caption': 'Straßenansicht — so sieht unser Haus aus.',
+      'map.navigate': 'Navigation öffnen',
+      'dir.1': 'Von Nova Gorica Richtung <strong>Ajdovščina / Col</strong> fahren.<small>Den Schildern nach Čepovan folgen.</small>',
+      'dir.2': 'Im Dorf nach <strong>Hausnummer 76</strong> suchen.<small>Das Haus liegt auf der linken Straßenseite.</small>',
+      'dir.3': 'Achten Sie auf das <strong>gelbe Imkerschild</strong> vor dem Haus.<small>Parken ist entlang der Straße möglich.</small>',
+      'dir.landmark': '<strong>Orientierungspunkt:</strong> Čepovan liegt im Tal Čepovanska grapa. Das Ortsschild bestätigt Ihnen, dass Sie richtig sind.',
+      'form.title': 'Bestellung oder Frage',
+      'form.name': 'Name', 'form.name.ph': 'Max Mustermann', 'form.email.ph': 'max@beispiel.de',
+      'form.subject': 'Betreff', 'form.subject.order': 'Honigbestellung', 'form.subject.general': 'Allgemeine Anfrage', 'form.subject.visit': 'Besuch im Bienenhaus',
+      'form.message': 'Nachricht', 'form.message.ph': 'Ich möchte zwei Gläser Akazienhonig bestellen …',
+      'form.send': 'Nachricht senden',
+      'form.success': 'Danke! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.',
+      'form.error': 'Senden fehlgeschlagen. Bitte versuchen Sie es erneut.',
+      'form.offline': 'Senden fehlgeschlagen. Bitte prüfen Sie Ihre Internetverbindung.',
+      'footer': 'Natürlicher Honig aus Slowenien',
+      'title': 'Imkerei Urbanc — Honig aus dem Čepovan-Tal'
+    },
+    it: {
+      'brand': 'Apicoltura Urbanc',
+      'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
+      'hero.eyebrow': 'Apicoltura di famiglia · Čepovan',
+      'hero.title': 'Miele della valle di <em>Čepovan</em>',
+      'hero.lead': 'Le nostre api raccolgono il nettare nella natura incontaminata della valle di Čepovan. Smieliamo a mano, in piccoli lotti e senza aggiunte.',
+      'hero.cta': 'Scegli il tuo miele', 'hero.cta2': 'Vieni a trovarci',
+      'hero.alt': 'La valle di Čepovan',
+      'hero.stamp': 'SMIELATO A MANO · SENZA AGGIUNTE · ČEPOVAN ·',
+      'honeys.title': 'I nostri mieli',
+      'honeys.lead': 'Ogni varietà ha la sua stagione. Quando i vasetti finiscono, aspettiamo il prossimo raccolto.',
+      'honey.linden': 'Miele di tiglio', 'honey.linden.desc': 'Delicato e aromatico, con un lieve sapore floreale.',
+      'honey.flower': 'Millefiori', 'honey.flower.desc': 'Il gusto equilibrato dei fiori di prato estivi.',
+      'honey.acacia': 'Miele di acacia', 'honey.acacia.desc': 'Chiaro, fluido e particolarmente dolce.',
+      'honey.forest': 'Miele di bosco', 'honey.forest.desc': 'Miele ricco e scuro dal sapore intenso.',
+      'status.available': 'Disponibile', 'status.soldout': 'Esaurito', 'status.nextHarvest': 'Nuovo raccolto: [MESE]',
+      'story.eyebrow': 'La nostra storia', 'story.title': 'Dall’arnia al vasetto',
+      'story.1.title': 'Arnie nella natura', 'story.1.text': 'Il nostro apiario si trova tra i prati e i boschi della valle di Čepovan, lontano dall’agricoltura intensiva.',
+      'story.2.title': 'Smielato a mano', 'story.2.text': 'Disopercoliamo e smieliamo i favi noi stessi. Il miele viene solo filtrato: non aggiungiamo nulla e non lo riscaldiamo mai.',
+      'story.3.title': 'Direttamente a voi', 'story.3.text': 'Potete ritirare il miele da noi a Čepovan oppure possiamo concordare la consegna.',
+      'gallery.1': 'Api operose', 'gallery.1.alt': 'Api sull’arnia',
+      'gallery.2': 'Uno sciame', 'gallery.2.alt': 'Uno sciame di api',
+      'gallery.3': 'Il nostro apiario',
+      'faq.eyebrow': 'Domande', 'faq.title': 'Domande frequenti',
+      'faq.lead': 'Non trovate la risposta? <a href="#obisk"><strong>Scriveteci.</strong></a>',
+      'faq.1.q': 'Come posso ordinare il miele?', 'faq.1.a': 'Scriveteci tramite il modulo qui sotto o chiamate il [TELEFONO]. Concorderemo il ritiro a Čepovan o la consegna.',
+      'faq.2.q': 'Spedite il miele per posta?', 'faq.2.a': '[RISPOSTA — ad es. sì, in tutta la Slovenia; spedizione [PREZZO] €, gratuita per ordini oltre [IMPORTO] €.]',
+      'faq.3.q': 'Perché il mio miele si è solidificato?', 'faq.3.a': 'La cristallizzazione è un processo naturale e un segno di miele autentico. Mettete il vasetto a bagnomaria tiepido (fino a 40 °C) e tornerà fluido.',
+      'faq.4.q': 'Quanto dura il miele?', 'faq.4.a': 'Conservato correttamente — in un luogo asciutto e buio, nel vasetto chiuso — il miele si mantiene per anni.',
+      'faq.5.q': 'Posso visitare l’apiario?', 'faq.5.a': 'Certo, su appuntamento. Vi mostreremo le arnie e vi offriremo una degustazione di tutte le varietà.',
+      'visit.eyebrow': 'Visita all’apiario', 'visit.title': 'Venite ad assaggiare', 'visit.country': 'Slovenia',
+      'map.tab.map': 'Mappa', 'map.tab.street': 'Street View', 'map.tab.directions': 'Indicazioni',
+      'map.street.caption': 'Street View — ecco com’è la nostra casa.',
+      'map.navigate': 'Apri navigazione',
+      'dir.1': 'Da Nova Gorica, guidate in direzione <strong>Ajdovščina / Col</strong>.<small>Seguite le indicazioni per Čepovan.</small>',
+      'dir.2': 'Nel paese, cercate il <strong>numero civico 76</strong>.<small>La casa è sul lato sinistro della strada.</small>',
+      'dir.3': 'Riconoscerete la casa dal <strong>cartello giallo dell’apicoltore</strong>.<small>Si può parcheggiare lungo la strada.</small>',
+      'dir.landmark': '<strong>Punto di riferimento:</strong> Čepovan si trova nella valle Čepovanska grapa. Il cartello del paese vi confermerà che siete nel posto giusto.',
+      'form.title': 'Ordine o domanda',
+      'form.name': 'Nome', 'form.name.ph': 'Mario Rossi', 'form.email.ph': 'mario@esempio.it',
+      'form.subject': 'Oggetto', 'form.subject.order': 'Ordine di miele', 'form.subject.general': 'Informazioni generali', 'form.subject.visit': 'Visita all’apiario',
+      'form.message': 'Messaggio', 'form.message.ph': 'Vorrei ordinare due vasetti di miele di acacia …',
+      'form.send': 'Invia messaggio',
+      'form.success': 'Grazie! Il vostro messaggio è stato inviato. Vi risponderemo a breve.',
+      'form.error': 'Invio non riuscito. Riprovate, per favore.',
+      'form.offline': 'Invio non riuscito. Controllate la connessione a Internet.',
+      'footer': 'Miele naturale dalla Slovenia',
+      'title': 'Apicoltura Urbanc — miele della valle di Čepovan'
+    }
+  };
 
-  // Jezik
+  let currentLang = 'sl';
+  const t = (key) => (I18N[currentLang] && I18N[currentLang][key]) ?? I18N.sl[key] ?? '';
+
   function setLang(lang) {
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    el.classList.toggle('lang-active', el.dataset.lang === lang);
-  });
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-
-  document.querySelectorAll('select option[data-lang]').forEach(opt => {
-    opt.hidden = opt.dataset.lang !== lang;
-  });
-}
-
-  // Tabs
-  function showTab(id, btn) {
-    document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
+    if (!I18N[lang]) lang = 'sl';
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.title = t('title');
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t(el.dataset.i18nAlt); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const on = btn.dataset.lang === lang;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on);
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
-  // Obrazec — async submit prek Formspree
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+
+  // Map tabs
+  document.querySelectorAll('.map-tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.map-tab').forEach(x => x.classList.toggle('active', x === tab));
+    document.querySelectorAll('.map-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + tab.dataset.tab));
+  }));
+
+  // Contact form — async submit via Formspree
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
-    const data = new FormData(form);
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
       if (res.ok) {
         form.reset();
         document.getElementById('form-success').style.display = 'block';
       } else {
-        alert('Napaka pri pošiljanju. Prosimo, poskusite znova.');
+        alert(t('form.error'));
       }
     } catch {
-      alert('Napaka pri pošiljanju. Prosimo, preverite internetno povezavo.');
+      alert(t('form.offline'));
     }
   });
 
-  // Ob nalaganju nastavi pravilne select opcije
-  setLang('sl');
-  document.querySelectorAll('select option[data-lang]').forEach(opt => {
-    opt.hidden = opt.dataset.lang !== 'sl';
-  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Initial language: saved choice, else browser language, else Slovenian
+  let initial = 'sl';
+  try { initial = localStorage.getItem('lang') || (navigator.language || 'sl').slice(0, 2); } catch (e) {}
+  setLang(initial);
 </script>
 
 </body>
