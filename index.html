@@ -258,6 +258,33 @@
       border-radius: 12px; padding: 14px 16px; color: #27500A; font-size: 15px;
     }
 
+    /* ---------- LIGHTBOX ---------- */
+    .lightbox {
+      border: none; padding: 0; background: transparent;
+      max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh;
+      overflow: hidden;
+    }
+    .lightbox[open] { display: flex; align-items: center; justify-content: center; gap: 12px; animation: lb-in .2s ease; }
+    .lightbox::backdrop { background: rgba(26, 17, 8, 0.88); }
+    @keyframes lb-in { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: none; } }
+    .lb-figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: calc(100vw - 160px); }
+    .lb-img { max-width: 100%; max-height: calc(100vh - 120px); width: auto; height: auto; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+    .lb-caption { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--paper); }
+    .lb-btn {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(251,245,234,.35); background: rgba(251,245,234,.12); color: var(--paper);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      transition: background .15s;
+    }
+    .lb-btn:hover, .lb-btn:focus-visible { background: rgba(251,245,234,.28); outline: none; }
+    .lb-close { position: absolute; top: 20px; right: 20px; }
+    @media (max-width: 760px) {
+      .lb-figure { max-width: calc(100vw - 24px); }
+      .lb-prev, .lb-next { position: absolute; bottom: 20px; }
+      .lb-prev { left: calc(50% - 60px); } .lb-next { right: calc(50% - 60px); }
+      .lb-img { max-height: calc(100vh - 180px); }
+    }
+
     footer { padding: 28px 24px; text-align: center; font-size: 14px; color: var(--muted); }
 
     @media (max-width: 760px) {
@@ -451,15 +478,15 @@
 <section class="gallery" aria-label="Galerija">
   <div class="container">
     <figure>
-      <a href="img/cebele.jpg" target="_blank" rel="noopener"><img class="arch" src="img/cebele.jpg" alt="Čebele na panju" data-i18n-alt="gallery.1.alt" loading="lazy" width="1100" height="733"></a>
+      <a href="img/cebele.jpg" class="js-lightbox"><img class="arch" src="img/cebele.jpg" alt="Čebele na panju" data-i18n-alt="gallery.1.alt" loading="lazy" width="1100" height="733"></a>
       <figcaption data-i18n="gallery.1">Pridne čebele</figcaption>
     </figure>
     <figure>
-      <a href="img/roj.jpg" target="_blank" rel="noopener"><img class="rect" src="img/roj.jpg" alt="Roj čebel" data-i18n-alt="gallery.2.alt" loading="lazy" width="1100" height="1467"></a>
+      <a href="img/roj.jpg" class="js-lightbox"><img class="rect" src="img/roj.jpg" alt="Roj čebel" data-i18n-alt="gallery.2.alt" loading="lazy" width="1100" height="1467"></a>
       <figcaption data-i18n="gallery.2">Roj</figcaption>
     </figure>
     <figure>
-      <a href="img/cebelnjak.jpg" target="_blank" rel="noopener"><img class="arch" src="img/cebelnjak.jpg" alt="Naš čebelnjak" data-i18n-alt="gallery.3" loading="lazy" width="1100" height="1470"></a>
+      <a href="img/cebelnjak.jpg" class="js-lightbox"><img class="arch" src="img/cebelnjak.jpg" alt="Naš čebelnjak" data-i18n-alt="gallery.3" loading="lazy" width="1100" height="1470"></a>
       <figcaption data-i18n="gallery.3">Naš čebelnjak</figcaption>
     </figure>
   </div>
@@ -562,6 +589,20 @@
   </div>
 </section>
 
+<!-- MODALNO OKNO ZA GALERIJO -->
+<dialog class="lightbox" id="lightbox" aria-label="Galerija">
+  <button class="lb-btn lb-close" type="button" data-i18n-aria="lb.close" aria-label="Zapri">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" data-i18n-aria="lb.prev" aria-label="Prejšnja slika">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <figure class="lb-figure">
+    <img class="lb-img" src="" alt="">
+    <figcaption class="lb-caption"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" type="button" data-i18n-aria="lb.next" aria-label="Naslednja slika">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+</dialog>
+
 <footer>
   <span data-i18n="brand">Čebelarstvo Urbanc</span> &copy; <span id="year"></span> · <span data-i18n="footer">Naravni med iz Slovenije</span>
 </footer>
@@ -571,7 +612,7 @@
     sl: {
       'brand': 'Čebelarstvo Urbanc',
       'role.head': 'Glavni čebelar', 'role.beekeeper': 'Čebelar', 'role.helper': 'Pomočnik čebelarja', 'nav.contact': 'Kontakt', 'contact.title': 'Pokličite ali pišite nam', 'contact.lead': 'Za naročila in vprašanja smo dosegljivi po telefonu in WhatsAppu.', 'contact.call': 'Pokliči',
-      'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
+      'lb.close': 'Zapri', 'lb.prev': 'Prejšnja slika', 'lb.next': 'Naslednja slika', 'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
       'hero.eyebrow': 'Družinsko čebelarstvo · Čepovan',
       'hero.title': 'Med iz<br><em>Čepovanske</em><br>doline',
       'hero.lead': 'Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.',
@@ -622,7 +663,7 @@
     en: {
       'brand': 'Urbanc Beekeeping',
       'role.head': 'Head beekeeper', 'role.beekeeper': 'Beekeeper', 'role.helper': 'Beekeeper’s helper', 'nav.contact': 'Contact', 'contact.title': 'Call or message us', 'contact.lead': 'For orders and questions, reach us by phone or WhatsApp.', 'contact.call': 'Call',
-      'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
+      'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
       'hero.eyebrow': 'Family beekeepers · Čepovan',
       'hero.title': 'Honey from<br>the <em>Čepovan</em><br>Valley',
       'hero.lead': 'Our bees gather nectar in the unspoilt nature of the Čepovan Valley. We extract our honey by hand, in small batches, with nothing added.',
@@ -673,7 +714,7 @@
     de: {
       'brand': 'Imkerei Urbanc',
       'role.head': 'Imkermeister', 'role.beekeeper': 'Imker', 'role.helper': 'Imkergehilfe', 'nav.contact': 'Kontakt', 'contact.title': 'Rufen Sie uns an oder schreiben Sie uns', 'contact.lead': 'Für Bestellungen und Fragen erreichen Sie uns telefonisch oder per WhatsApp.', 'contact.call': 'Anrufen',
-      'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
+      'lb.close': 'Schließen', 'lb.prev': 'Vorheriges Foto', 'lb.next': 'Nächstes Foto', 'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
       'hero.eyebrow': 'Familienimkerei · Čepovan',
       'hero.title': 'Honig<br>aus dem<br><em>Čepovan</em>-Tal',
       'hero.lead': 'Unsere Bienen sammeln Nektar in der unberührten Natur des Čepovan-Tals. Wir schleudern unseren Honig von Hand, in kleinen Mengen und ohne Zusätze.',
@@ -724,7 +765,7 @@
     it: {
       'brand': 'Apicoltura Urbanc',
       'role.head': 'Apicoltore capo', 'role.beekeeper': 'Apicoltore', 'role.helper': 'Aiuto apicoltore', 'nav.contact': 'Contatti', 'contact.title': 'Chiamateci o scriveteci', 'contact.lead': 'Per ordini e domande siamo raggiungibili per telefono e su WhatsApp.', 'contact.call': 'Chiama',
-      'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
+      'lb.close': 'Chiudi', 'lb.prev': 'Foto precedente', 'lb.next': 'Foto successiva', 'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
       'hero.eyebrow': 'Apicoltura di famiglia · Čepovan',
       'hero.title': 'Miele<br>della valle<br>di <em>Čepovan</em>',
       'hero.lead': 'Le nostre api raccolgono il nettare nella natura incontaminata della valle di Čepovan. Smieliamo a mano, in piccoli lotti e senza aggiunte.',
@@ -784,6 +825,7 @@
     document.title = t('title');
     document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
     document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.alt = t(el.dataset.i18nAlt); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
     document.querySelectorAll('.lang-btn').forEach(btn => {
       const on = btn.dataset.lang === lang;
@@ -816,6 +858,35 @@
     card.querySelector('.js-wa').addEventListener('click', () => {
       window.open('https://wa.me/' + decodeNum(numEl), '_blank', 'noopener');
     });
+  });
+
+  // Galerija — modalno okno
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('.lb-img');
+  const lbCap = lb.querySelector('.lb-caption');
+  const shots = [...document.querySelectorAll('.js-lightbox')];
+  let lbIndex = 0;
+  function showShot(i) {
+    lbIndex = (i + shots.length) % shots.length;
+    const a = shots[lbIndex], img = a.querySelector('img');
+    lbImg.src = a.getAttribute('href');
+    lbImg.alt = img.alt;
+    lbCap.textContent = a.closest('figure').querySelector('figcaption').textContent;
+  }
+  shots.forEach((a, i) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    showShot(i);
+    lb.showModal();
+    document.body.style.overflow = 'hidden';
+  }));
+  lb.addEventListener('close', () => { document.body.style.overflow = ''; });
+  lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
+  lb.querySelector('.lb-prev').addEventListener('click', () => showShot(lbIndex - 1));
+  lb.querySelector('.lb-next').addEventListener('click', () => showShot(lbIndex + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') showShot(lbIndex - 1);
+    if (e.key === 'ArrowRight') showShot(lbIndex + 1);
   });
 
   // Map tabs
