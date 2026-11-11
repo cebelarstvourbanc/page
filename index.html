@@ -118,10 +118,14 @@
     .honey-card .desc { color: var(--ink-2); font-size: 15px; }
     .honey-meta {
       margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line);
-      display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; font-size: 14px;
     }
     .status { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--green); }
     .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--green-dot); }
+    .prices { list-style: none; margin: 0; padding: 0; text-align: right; }
+    .prices li { display: flex; gap: 12px; justify-content: flex-end; }
+    .prices li span:first-child { color: var(--muted); }
+    .prices li span:last-child { font-weight: 700; min-width: 3.2em; }
     .price { font-weight: 700; }
     .honey-card.soldout { background: transparent; border: 1.5px dashed var(--tan); }
     .honey-card.soldout:hover { transform: none; box-shadow: none; }
@@ -269,7 +273,7 @@
   <div class="container">
     <div class="hero-text">
       <span class="eyebrow" data-i18n="hero.eyebrow">Družinsko čebelarstvo · Čepovan</span>
-      <h1 data-i18n="hero.title">Med iz <em>Čepovanske</em> doline</h1>
+      <h1 data-i18n="hero.title">Med iz<br><em>Čepovanske</em><br>doline</h1>
       <p class="hero-lead" data-i18n="hero.lead">Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.</p>
       <div class="hero-actions">
         <a class="btn btn-dark" href="#medi" data-i18n="hero.cta">Izberite svoj med</a>
@@ -279,7 +283,7 @@
     </div>
     <div class="hero-media">
       <img src="img/dolina.jpg" alt="Čepovanska dolina" data-i18n-alt="hero.alt" width="1600" height="900">
-      <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="11" font-weight="700" letter-spacing="2.4" fill="#2B1D0E"><textPath href="#stampRing" data-i18n="hero.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
+      <svg class="hero-stamp" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="66" fill="#E39B1B"/><circle cx="70" cy="70" r="46" fill="none" stroke="#2B1D0E" stroke-width="1"/><defs><path id="stampRing" d="M70 70 m-54 0 a54 54 0 1 1 108 0 a54 54 0 1 1 -108 0"/></defs><text font-family="Karla, sans-serif" font-size="10.5" font-weight="700" fill="#2B1D0E"><textPath href="#stampRing" textLength="334" lengthAdjust="spacingAndGlyphs" data-i18n="hero.stamp">ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·</textPath></text><ellipse cx="70" cy="74" rx="14" ry="10" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="2"/><path d="M66 65 V83 M74 65 V83" stroke="#2B1D0E" stroke-width="2"/><ellipse cx="62" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(-20 62 60)"/><ellipse cx="78" cy="60" rx="8" ry="5" fill="none" stroke="#2B1D0E" stroke-width="2" transform="rotate(20 78 60)"/></svg>
       <svg class="hero-bee" width="220" height="90" viewBox="0 0 220 90" aria-hidden="true"><path d="M4 70 C40 20 80 90 120 50 S190 10 200 30" fill="none" stroke="#2B1D0E" stroke-width="1.6" stroke-dasharray="4 6" stroke-linecap="round"/><g transform="translate(196 14)"><ellipse cx="10" cy="14" rx="9" ry="6.5" fill="#E39B1B" stroke="#2B1D0E" stroke-width="1.6"/><path d="M7 8.5 V19.5 M12 8.5 V19.5" stroke="#2B1D0E" stroke-width="1.6"/><ellipse cx="6" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/><ellipse cx="14" cy="5" rx="5" ry="3.5" fill="#FBF5EA" stroke="#2B1D0E" stroke-width="1.4"/></g></svg>
     </div>
   </div>
@@ -293,37 +297,37 @@
       <p data-i18n="honeys.lead">Vsaka sorta ima svojo sezono. Ko kozarcev zmanjka, počakamo na naslednjo letino.</p>
     </div>
     <div class="honey-grid">
-      <!-- Za razprodan med kartici dodajte razred "soldout" in zamenjajte status. -->
+      <!-- Za razprodan med kartici dodajte razred "soldout", status "status.soldout" in namesto cen <p class="price" data-i18n="status.nextHarvest">. -->
       <article class="honey-card">
-        <img src="img/kozarec-lipov.svg" alt="Lipov med" data-i18n-alt="honey.linden" loading="lazy" width="400" height="500">
+        <img src="img/lipa.svg" alt="Lipa v cvetu" data-i18n-alt="img.linden" loading="lazy" width="400" height="500">
         <div class="honey-body">
           <h3 data-i18n="honey.linden">Lipov med</h3>
           <p class="desc" data-i18n="honey.linden.desc">Nežen in aromatičen, z blagim cvetličnim okusom.</p>
-          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><ul class="prices"><li><span>450 g</span><span>7 €</span></li><li><span>900 g</span><span>12 €</span></li></ul></div>
         </div>
       </article>
       <article class="honey-card">
-        <img src="img/kozarec-cvetlicni.svg" alt="Cvetlični med" data-i18n-alt="honey.flower" loading="lazy" width="400" height="500">
+        <img src="img/kostanj.svg" alt="Kostanj" data-i18n-alt="img.chestnut" loading="lazy" width="400" height="500">
         <div class="honey-body">
-          <h3 data-i18n="honey.flower">Cvetlični med</h3>
-          <p class="desc" data-i18n="honey.flower.desc">Uravnotežen okus poletnih travniških cvetlic.</p>
-          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
+          <h3 data-i18n="honey.chestnut">Kostanjev med</h3>
+          <p class="desc" data-i18n="honey.chestnut.desc">Temen in močan, z značilnim rahlo grenkim okusom.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><ul class="prices"><li><span>450 g</span><span>8 €</span></li><li><span>900 g</span><span>14 €</span></li></ul></div>
         </div>
       </article>
       <article class="honey-card">
-        <img src="img/kozarec-akacijev.svg" alt="Akacijev med" data-i18n-alt="honey.acacia" loading="lazy" width="400" height="500">
-        <div class="honey-body">
-          <h3 data-i18n="honey.acacia">Akacijev med</h3>
-          <p class="desc" data-i18n="honey.acacia.desc">Svetel, tekoč in posebno sladek.</p>
-          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><span class="price">[CENA] / 450 g</span></div>
-        </div>
-      </article>
-      <article class="honey-card soldout">
-        <img src="img/kozarec-gozdni.svg" alt="Gozdni med" data-i18n-alt="honey.forest" loading="lazy" width="400" height="500">
+        <img src="img/gozd.svg" alt="Gozd" data-i18n-alt="img.forest" loading="lazy" width="400" height="500">
         <div class="honey-body">
           <h3 data-i18n="honey.forest">Gozdni med</h3>
           <p class="desc" data-i18n="honey.forest.desc">Bogat, temnejši med z intenzivnim okusom.</p>
-          <div class="honey-meta"><span class="status" data-i18n="status.soldout">Razprodano</span><span class="price" data-i18n="status.nextHarvest">Nova letina: [MESEC]</span></div>
+          <div class="honey-meta"><span class="status" data-i18n="status.available">Na voljo</span><ul class="prices"><li><span>900 g</span><span>13 €</span></li></ul></div>
+        </div>
+      </article>
+      <article class="honey-card soldout">
+        <img src="img/akacija.svg" alt="Akacija v cvetu" data-i18n-alt="img.acacia" loading="lazy" width="400" height="500">
+        <div class="honey-body">
+          <h3 data-i18n="honey.acacia">Akacijev med</h3>
+          <p class="desc" data-i18n="honey.acacia.desc">Svetel, tekoč in posebno sladek.</p>
+          <div class="honey-meta"><span class="status" data-i18n="status.soldout">Razprodano</span><p class="price" data-i18n="status.nextHarvest">Spet na voljo po naslednji letini</p></div>
         </div>
       </article>
     </div>
@@ -414,7 +418,7 @@
   <div class="container">
     <div class="visit-info">
       <span class="eyebrow" data-i18n="visit.eyebrow">Obisk čebelnjaka</span>
-      <h2 data-i18n="visit.title">Pridite pokusit k nam</h2>
+      <h2 data-i18n="visit.title">Pridite poskusit k nam</h2>
       <p>Čepovan 76, 5253 Čepovan, <span data-i18n="visit.country">Slovenija</span></p>
 
       <div class="map-tabs" role="tablist">
@@ -470,7 +474,7 @@
           <option value="visit" data-i18n="form.subject.visit">Obisk čebelnjaka</option>
         </select></label>
       <label class="field"><span data-i18n="form.message">Sporočilo</span>
-        <textarea name="sporocilo" required placeholder="Rad bi naročil dva kozarca akacijevega medu …" data-i18n-placeholder="form.message.ph"></textarea></label>
+        <textarea name="sporocilo" required placeholder="Rad bi naročil dva kozarca lipovega medu …" data-i18n-placeholder="form.message.ph"></textarea></label>
       <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
       <button class="btn btn-dark" type="submit" style="align-self: flex-start" data-i18n="form.send">Pošlji sporočilo</button>
       <div class="form-success" id="form-success" data-i18n="form.success">Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.</div>
@@ -488,18 +492,20 @@
       'brand': 'Čebelarstvo Urbanc',
       'nav.honeys': 'Medi', 'nav.story': 'Od panja do kozarca', 'nav.faq': 'Vprašanja', 'nav.visit': 'Obisk',
       'hero.eyebrow': 'Družinsko čebelarstvo · Čepovan',
-      'hero.title': 'Med iz <em>Čepovanske</em> doline',
+      'hero.title': 'Med iz<br><em>Čepovanske</em><br>doline',
       'hero.lead': 'Naše čebele nabirajo nektar v neokrnjeni naravi Čepovanske doline. Med točimo ročno, v majhnih serijah in brez dodatkov.',
       'hero.cta': 'Izberite svoj med', 'hero.cta2': 'Obiščite nas',
       'hero.alt': 'Čepovanska dolina',
       'hero.stamp': 'ROČNO TOČENO · BREZ DODATKOV · ČEPOVAN ·',
       'honeys.title': 'Naši medi',
       'honeys.lead': 'Vsaka sorta ima svojo sezono. Ko kozarcev zmanjka, počakamo na naslednjo letino.',
+      'img.linden': 'Lipa v cvetu', 'img.flower': 'Cvetoč travnik', 'img.acacia': 'Akacija v cvetu', 'img.forest': 'Gozd',
       'honey.linden': 'Lipov med', 'honey.linden.desc': 'Nežen in aromatičen, z blagim cvetličnim okusom.',
       'honey.flower': 'Cvetlični med', 'honey.flower.desc': 'Uravnotežen okus poletnih travniških cvetlic.',
       'honey.acacia': 'Akacijev med', 'honey.acacia.desc': 'Svetel, tekoč in posebno sladek.',
+      'honey.chestnut': 'Kostanjev med', 'honey.chestnut.desc': 'Temen in močan, z značilnim rahlo grenkim okusom.', 'img.chestnut': 'Kostanj',
       'honey.forest': 'Gozdni med', 'honey.forest.desc': 'Bogat, temnejši med z intenzivnim okusom.',
-      'status.available': 'Na voljo', 'status.soldout': 'Razprodano', 'status.nextHarvest': 'Nova letina: [MESEC]',
+      'status.available': 'Na voljo', 'status.soldout': 'Razprodano', 'status.nextHarvest': 'Spet na voljo po naslednji letini',
       'story.eyebrow': 'Naša zgodba', 'story.title': 'Od panja do kozarca',
       'story.1.title': 'Panji v naravi', 'story.1.text': 'Čebelnjak stoji sredi travnikov in gozdov Čepovanske doline, daleč od intenzivnega kmetijstva.',
       'story.2.title': 'Ročno točenje', 'story.2.text': 'Satje odkrivamo in točimo sami. Med samo precedimo — ničesar ne dodajamo in ga ne segrevamo.',
@@ -514,7 +520,7 @@
       'faq.3.q': 'Zakaj se je moj med strdil?', 'faq.3.a': 'Kristalizacija je naraven proces in znak pravega medu. Kozarec postavite v toplo vodno kopel (do 40 °C) in med bo spet tekoč.',
       'faq.4.q': 'Kako dolgo med zdrži?', 'faq.4.a': 'Pravilno shranjen med — na suhem in temnem mestu, v zaprtem kozarcu — ostane užiten več let.',
       'faq.5.q': 'Ali lahko obiščem čebelnjak?', 'faq.5.a': 'Seveda, po predhodnem dogovoru. Pokažemo vam panje in pripravimo pokušino vseh sort.',
-      'visit.eyebrow': 'Obisk čebelnjaka', 'visit.title': 'Pridite pokusit k nam', 'visit.country': 'Slovenija',
+      'visit.eyebrow': 'Obisk čebelnjaka', 'visit.title': 'Pridite poskusit k nam', 'visit.country': 'Slovenija',
       'map.tab.map': 'Zemljevid', 'map.tab.street': 'Pogled z ulice', 'map.tab.directions': 'Navodila',
       'map.street.caption': 'Pogled z ulice — tako izgleda naša hiša.',
       'map.navigate': 'Odpri navigacijo',
@@ -525,7 +531,7 @@
       'form.title': 'Naročilo ali vprašanje',
       'form.name': 'Ime', 'form.name.ph': 'Janez Novak', 'form.email.ph': 'janez@primer.si',
       'form.subject': 'Zadeva', 'form.subject.order': 'Naročilo medu', 'form.subject.general': 'Splošno vprašanje', 'form.subject.visit': 'Obisk čebelnjaka',
-      'form.message': 'Sporočilo', 'form.message.ph': 'Rad bi naročil dva kozarca akacijevega medu …',
+      'form.message': 'Sporočilo', 'form.message.ph': 'Rad bi naročil dva kozarca lipovega medu …',
       'form.send': 'Pošlji sporočilo',
       'form.success': 'Hvala! Vaše sporočilo je bilo poslano. Odgovorili vam bomo v kratkem.',
       'form.error': 'Napaka pri pošiljanju. Prosimo, poskusite znova.',
@@ -537,18 +543,20 @@
       'brand': 'Urbanc Beekeeping',
       'nav.honeys': 'Honey', 'nav.story': 'From hive to jar', 'nav.faq': 'FAQ', 'nav.visit': 'Visit',
       'hero.eyebrow': 'Family beekeepers · Čepovan',
-      'hero.title': 'Honey from the <em>Čepovan</em> Valley',
+      'hero.title': 'Honey from<br>the <em>Čepovan</em><br>Valley',
       'hero.lead': 'Our bees gather nectar in the unspoilt nature of the Čepovan Valley. We extract our honey by hand, in small batches, with nothing added.',
       'hero.cta': 'Choose your honey', 'hero.cta2': 'Visit us',
       'hero.alt': 'The Čepovan Valley',
       'hero.stamp': 'HAND-EXTRACTED · NOTHING ADDED · ČEPOVAN ·',
       'honeys.title': 'Our honey',
       'honeys.lead': 'Every variety has its season. When the jars run out, we wait for the next harvest.',
+      'img.linden': 'A linden tree in bloom', 'img.flower': 'A meadow in bloom', 'img.acacia': 'An acacia tree in bloom', 'img.forest': 'A forest',
       'honey.linden': 'Linden honey', 'honey.linden.desc': 'Delicate and aromatic, with a mild floral taste.',
       'honey.flower': 'Wildflower honey', 'honey.flower.desc': 'The balanced taste of summer meadow flowers.',
       'honey.acacia': 'Acacia honey', 'honey.acacia.desc': 'Light, runny and especially sweet.',
+      'honey.chestnut': 'Chestnut honey', 'honey.chestnut.desc': 'Dark and strong, with a typical slightly bitter taste.', 'img.chestnut': 'A chestnut tree',
       'honey.forest': 'Forest honey', 'honey.forest.desc': 'Rich, darker honey with an intense flavour.',
-      'status.available': 'Available', 'status.soldout': 'Sold out', 'status.nextHarvest': 'Next harvest: [MONTH]',
+      'status.available': 'Available', 'status.soldout': 'Sold out', 'status.nextHarvest': 'Back after the next harvest',
       'story.eyebrow': 'Our story', 'story.title': 'From hive to jar',
       'story.1.title': 'Hives in nature', 'story.1.text': 'Our apiary stands among the meadows and forests of the Čepovan Valley, far from intensive farming.',
       'story.2.title': 'Extracted by hand', 'story.2.text': 'We uncap and extract the combs ourselves. The honey is only strained — nothing is added and it is never heated.',
@@ -574,7 +582,7 @@
       'form.title': 'Order or question',
       'form.name': 'Name', 'form.name.ph': 'John Smith', 'form.email.ph': 'john@example.com',
       'form.subject': 'Subject', 'form.subject.order': 'Honey order', 'form.subject.general': 'General enquiry', 'form.subject.visit': 'Visiting the apiary',
-      'form.message': 'Message', 'form.message.ph': 'I’d like to order two jars of acacia honey …',
+      'form.message': 'Message', 'form.message.ph': 'I’d like to order two jars of linden honey …',
       'form.send': 'Send message',
       'form.success': 'Thank you! Your message has been sent. We’ll get back to you shortly.',
       'form.error': 'Sending failed. Please try again.',
@@ -586,18 +594,20 @@
       'brand': 'Imkerei Urbanc',
       'nav.honeys': 'Honig', 'nav.story': 'Vom Stock ins Glas', 'nav.faq': 'Fragen', 'nav.visit': 'Besuch',
       'hero.eyebrow': 'Familienimkerei · Čepovan',
-      'hero.title': 'Honig aus dem <em>Čepovan</em>-Tal',
+      'hero.title': 'Honig<br>aus dem<br><em>Čepovan</em>-Tal',
       'hero.lead': 'Unsere Bienen sammeln Nektar in der unberührten Natur des Čepovan-Tals. Wir schleudern unseren Honig von Hand, in kleinen Mengen und ohne Zusätze.',
       'hero.cta': 'Wählen Sie Ihren Honig', 'hero.cta2': 'Besuchen Sie uns',
       'hero.alt': 'Das Čepovan-Tal',
       'hero.stamp': 'HANDGESCHLEUDERT · OHNE ZUSÄTZE · ČEPOVAN ·',
       'honeys.title': 'Unsere Honigsorten',
       'honeys.lead': 'Jede Sorte hat ihre Saison. Sind die Gläser leer, warten wir auf die nächste Ernte.',
+      'img.linden': 'Blühende Linde', 'img.flower': 'Blühende Wiese', 'img.acacia': 'Blühende Akazie', 'img.forest': 'Wald',
       'honey.linden': 'Lindenhonig', 'honey.linden.desc': 'Zart und aromatisch, mit mildem Blütengeschmack.',
       'honey.flower': 'Blütenhonig', 'honey.flower.desc': 'Der ausgewogene Geschmack sommerlicher Wiesenblumen.',
       'honey.acacia': 'Akazienhonig', 'honey.acacia.desc': 'Hell, flüssig und besonders süß.',
+      'honey.chestnut': 'Kastanienhonig', 'honey.chestnut.desc': 'Dunkel und kräftig, mit typisch leicht herbem Geschmack.', 'img.chestnut': 'Kastanienbaum',
       'honey.forest': 'Waldhonig', 'honey.forest.desc': 'Kräftiger, dunklerer Honig mit intensivem Aroma.',
-      'status.available': 'Verfügbar', 'status.soldout': 'Ausverkauft', 'status.nextHarvest': 'Neue Ernte: [MONAT]',
+      'status.available': 'Verfügbar', 'status.soldout': 'Ausverkauft', 'status.nextHarvest': 'Wieder nach der nächsten Ernte',
       'story.eyebrow': 'Unsere Geschichte', 'story.title': 'Vom Bienenstock ins Glas',
       'story.1.title': 'Bienenstöcke in der Natur', 'story.1.text': 'Unser Bienenhaus steht inmitten der Wiesen und Wälder des Čepovan-Tals, fern von intensiver Landwirtschaft.',
       'story.2.title': 'Von Hand geschleudert', 'story.2.text': 'Wir entdeckeln und schleudern die Waben selbst. Der Honig wird nur gesiebt — nichts wird hinzugefügt, und er wird nie erhitzt.',
@@ -623,7 +633,7 @@
       'form.title': 'Bestellung oder Frage',
       'form.name': 'Name', 'form.name.ph': 'Max Mustermann', 'form.email.ph': 'max@beispiel.de',
       'form.subject': 'Betreff', 'form.subject.order': 'Honigbestellung', 'form.subject.general': 'Allgemeine Anfrage', 'form.subject.visit': 'Besuch im Bienenhaus',
-      'form.message': 'Nachricht', 'form.message.ph': 'Ich möchte zwei Gläser Akazienhonig bestellen …',
+      'form.message': 'Nachricht', 'form.message.ph': 'Ich möchte zwei Gläser Lindenhonig bestellen …',
       'form.send': 'Nachricht senden',
       'form.success': 'Danke! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.',
       'form.error': 'Senden fehlgeschlagen. Bitte versuchen Sie es erneut.',
@@ -635,18 +645,20 @@
       'brand': 'Apicoltura Urbanc',
       'nav.honeys': 'Mieli', 'nav.story': 'Dall’arnia al vasetto', 'nav.faq': 'Domande', 'nav.visit': 'Visita',
       'hero.eyebrow': 'Apicoltura di famiglia · Čepovan',
-      'hero.title': 'Miele della valle di <em>Čepovan</em>',
+      'hero.title': 'Miele<br>della valle<br>di <em>Čepovan</em>',
       'hero.lead': 'Le nostre api raccolgono il nettare nella natura incontaminata della valle di Čepovan. Smieliamo a mano, in piccoli lotti e senza aggiunte.',
       'hero.cta': 'Scegli il tuo miele', 'hero.cta2': 'Vieni a trovarci',
       'hero.alt': 'La valle di Čepovan',
       'hero.stamp': 'SMIELATO A MANO · SENZA AGGIUNTE · ČEPOVAN ·',
       'honeys.title': 'I nostri mieli',
       'honeys.lead': 'Ogni varietà ha la sua stagione. Quando i vasetti finiscono, aspettiamo il prossimo raccolto.',
+      'img.linden': 'Tiglio in fiore', 'img.flower': 'Prato fiorito', 'img.acacia': 'Acacia in fiore', 'img.forest': 'Bosco',
       'honey.linden': 'Miele di tiglio', 'honey.linden.desc': 'Delicato e aromatico, con un lieve sapore floreale.',
       'honey.flower': 'Millefiori', 'honey.flower.desc': 'Il gusto equilibrato dei fiori di prato estivi.',
       'honey.acacia': 'Miele di acacia', 'honey.acacia.desc': 'Chiaro, fluido e particolarmente dolce.',
+      'honey.chestnut': 'Miele di castagno', 'honey.chestnut.desc': 'Scuro e deciso, dal tipico sapore leggermente amarognolo.', 'img.chestnut': 'Castagno',
       'honey.forest': 'Miele di bosco', 'honey.forest.desc': 'Miele ricco e scuro dal sapore intenso.',
-      'status.available': 'Disponibile', 'status.soldout': 'Esaurito', 'status.nextHarvest': 'Nuovo raccolto: [MESE]',
+      'status.available': 'Disponibile', 'status.soldout': 'Esaurito', 'status.nextHarvest': 'Di nuovo dopo il prossimo raccolto',
       'story.eyebrow': 'La nostra storia', 'story.title': 'Dall’arnia al vasetto',
       'story.1.title': 'Arnie nella natura', 'story.1.text': 'Il nostro apiario si trova tra i prati e i boschi della valle di Čepovan, lontano dall’agricoltura intensiva.',
       'story.2.title': 'Smielato a mano', 'story.2.text': 'Disopercoliamo e smieliamo i favi noi stessi. Il miele viene solo filtrato: non aggiungiamo nulla e non lo riscaldiamo mai.',
@@ -672,7 +684,7 @@
       'form.title': 'Ordine o domanda',
       'form.name': 'Nome', 'form.name.ph': 'Mario Rossi', 'form.email.ph': 'mario@esempio.it',
       'form.subject': 'Oggetto', 'form.subject.order': 'Ordine di miele', 'form.subject.general': 'Informazioni generali', 'form.subject.visit': 'Visita all’apiario',
-      'form.message': 'Messaggio', 'form.message.ph': 'Vorrei ordinare due vasetti di miele di acacia …',
+      'form.message': 'Messaggio', 'form.message.ph': 'Vorrei ordinare due vasetti di miele di tiglio …',
       'form.send': 'Invia messaggio',
       'form.success': 'Grazie! Il vostro messaggio è stato inviato. Vi risponderemo a breve.',
       'form.error': 'Invio non riuscito. Riprovate, per favore.',
@@ -728,9 +740,9 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Initial language: saved choice, else browser language, else Slovenian
+  // Privzeto slovenščina; drug jezik samo, če ga je obiskovalec že izbral sam.
   let initial = 'sl';
-  try { initial = localStorage.getItem('lang') || (navigator.language || 'sl').slice(0, 2); } catch (e) {}
+  try { initial = localStorage.getItem('lang') || 'sl'; } catch (e) {}
   setLang(initial);
 </script>
 
